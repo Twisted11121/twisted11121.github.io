@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Računalniki na prodaj,
+                                    Prodaja računalnikov,
+                                    Računalniki za domačo uporabo,
+                                    Računalniki za igre,
+                                    Igre računalniki,
+                                    Računalniki za delo,
+                                    Prenosni računalniki na prodaj,
+                                    Računalniki za podjetja,
+                                    Custom računalniki,
+                                    Po meri sestavljeni računalniki,
+                                    Računalniki po naročilu,
+                                    Gaming računalniki po meri,
+                                    Računalniki po meri za igre,
+                                    Specializirani računalniki,
+                                    Računalniki za profesionalno uporabo,
+                                    Visoko zmogljivi računalniki,
+                                    Po meri sestavljen računalnik za gaming">
+    <meta name="description" content="D - Computers je spletna trgovina, ki se okvarja z prodajo in sestavljanjem po naročilu računalnike ali že sestavljene računalnike.">
+    <meta name="author" content="Borche Donev">
+    <title>D-Computers - Vodilna trgovina za računalniško opremo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .about-hero {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #3498db;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            background-color: white;
+            border: 4px solid #3498db;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid #f1f1f1;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent #f1f1f1;
+        }
+        
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid #f1f1f1;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent #f1f1f1 transparent transparent;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .team-card {
+            transition: transform 0.3s;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-img {
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .value-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="slike/logo.png" alt="D-Computers Logo">
+                <span class="fw-bold">D-Computers</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Domov</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="računalniki.html">Izdelki</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="company-support.html">Podpora</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="company-about.html">O nas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontakt.html">Kontakt</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="merch.html">Merch</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="about-hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">O podjetju D-Computers</h1>
+            <p class="lead">Vodilni ponudnik računalniške opreme v Sloveniji z več kot 15-letno tradicijo</p>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="mb-4">Naša zgodba</h2>
+                    <p>D-Computers je bil ustanovljen leta 2008 z vizijo, da postane vodilni ponudnik kakovostne računalniške opreme v Sloveniji. Začeli smo kot majhna trgovina v centru Ljubljane, danes pa smo ena največjih verig specializiranih trgovin na tem področju.</p>
+                    <p>Naše podjetje temelji na treh glavnih vrednotah: kakovost, zanesljivost in odlična storitev. Vedno si prizadevamo preseči pričakovanja naših strank z najboljšimi izdelki in strokovnim nasvetom.</p>
+                    <p>Danes zaposlujemo več kot 50 strokovnjakov z različnih področij IT-ja, ki so vedno pripravljeni pomagati našim strankam pri izbiri optimalne rešitve za njihove potrebe.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Naša trgovina" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Naša pot</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>2008</h3>
+                        <p>Ustanovitev podjetja in odprtje prve trgovine v Ljubljani</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>2012</h3>
+                        <p>Širitev ponudbe in odprtje spletne trgovine</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>2015</h3>
+                        <p>Odprtje dveh novih poslovalnic v Mariboru in Celju</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>2018</h3>
+                        <p>Podelitev nagrade za najboljšo računalniško trgovino v Sloveniji</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>2022</h3>
+                        <p>Začetek lastne proizvodnje računalniških komponent pod lastno blagovno znamko</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>2025</h3>
+                        <p>Razširitev na nove trge v sosednjih državah</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Naše vrednote</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card value-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3 mb-3 mx-auto" style="width: 80px; height: 80px;">
+                                <i class="fas fa-medal fa-2x"></i>
+                            </div>
+                            <h3 class="h4">Kakovost</h3>
+                            <p class="mb-0">Ponujamo samo preverjene izdelke vodilnih proizvajalcev z dolgotrajnimi garancijami.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card value-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3 mb-3 mx-auto" style="width: 80px; height: 80px;">
+                                <i class="fas fa-handshake fa-2x"></i>
+                            </div>
+                            <h3 class="h4">Zanesljivost</h3>
+                            <p class="mb-0">Naše stranke lahko vedno računajo na nas, tudi po zaključenem nakupu.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card value-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3 mb-3 mx-auto" style="width: 80px; height: 80px;">
+                                <i class="fas fa-headset fa-2x"></i>
+                            </div>
+                            <h3 class="h4">Storitev</h3>
+                            <p class="mb-0">Strokovno osebje vam bo vedno znalo svetovati in pomagati pri reševanju težav.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Naša ekipa</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card team-card h-100">
+                        <img src="https://media.istockphoto.com/id/2163039897/photo/man-taking-selfie-in-sunny-countryside-landscape.jpg?s=2048x2048&w=is&k=20&c=weNTHyLAa-3GhpRkucVjQfNKE7uDL3NafakAtx3EYo0=" class="card-img-top team-img" alt="Janez Novak">
+                        <div class="card-body text-center">
+                            <h3 class="h5">Janez Novak</h3>
+                            <p class="text-muted">Direktor & Ustanovitelj</p>
+                            <p class="card-text">"Moja vizija je bila vedno ustvariti podjetje, kjer kvaliteta in stranka stojita na prvem mestu."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card team-card h-100">
+                        <img src="https://media.istockphoto.com/id/1999831980/photo/beautiful-young-woman-taking-selfie-at-home.jpg?s=2048x2048&w=is&k=20&c=GVCAjtqeoB_vtmrP-8xw53LhjtXJ_zIsbAkSijIOv-c=" class="card-img-top team-img" alt="Ana Kovač">
+                        <div class="card-body text-center">
+                            <h3 class="h5">Ana Kovač</h3>
+                            <p class="text-muted">Vodja prodaje</p>
+                            <p class="card-text">"Veselim se vsakega novega dneva, ko lahko pomagam strankam najti pravo rešitev za njihove potrebe."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card team-card h-100">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg" class="card-img-top team-img" alt="Marko Žagar">
+                        <div class="card-body text-center">
+                            <h3 class="h5">Marko Žagar</h3>
+                            <p class="text-muted">Vodja tehnične podpore</p>
+                            <p class="card-text">"Naš cilj je, da strankam zagotovimo popolno podporo in rešimo vse težave."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4">D-Computers</h5>
+                    <p>Vodilna slovenska trgovina z računalniško opremo in dodatki.</p>
+                    <div class="mt-4">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4">Izdelki</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50">Prenosniki</a></li>
+                        <li class="mb-2"><a href="računalniki.html" class="text-white-50">Namizni računalniki</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4">Podpora</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="company-FAQ.html" class="text-white-50">Pogosta vprašanja</a></li>
+                        <li class="mb-2"><a href="warrenty.html" class="text-white-50">Garancije</a></li>
+                        <li><a href="#" class="text-white-50">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Kontakt</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Tržaška cesta 25, 1000 Ljubljana</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> 01 234 56 78</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@d-computers.si</li>
+                        <li><i class="fas fa-clock me-2"></i> Pn-Pt: 9:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4 bg-secondary">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-white-50">&copy; 2025 D-Computers. Vse pravice pridržane.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
