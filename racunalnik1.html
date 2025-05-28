@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Računalniki na prodaj,
+                                    Prodaja računalnikov,
+                                    Računalniki za domačo uporabo,
+                                    Računalniki za igre,
+                                    Igre računalniki,
+                                    Računalniki za delo,
+                                    Prenosni računalniki na prodaj,
+                                    Računalniki za podjetja,
+                                    Custom računalniki,
+                                    Po meri sestavljeni računalniki,
+                                    Računalniki po naročilu,
+                                    Gaming računalniki po meri,
+                                    Računalniki po meri za igre,
+                                    Specializirani računalniki,
+                                    Računalniki za profesionalno uporabo,
+                                    Visoko zmogljivi računalniki,
+                                    Po meri sestavljen računalnik za gaming">
+    <meta name="description" content="D - Computers je spletna trgovina, ki se okvarja z prodajo in sestavljanjem po naročilu računalnike ali že sestavljene računalnike.">
+    <meta name="author" content="Borche Donev">
+    <title>D-Computers - Vodilna trgovina za računalniško opremo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .product-card {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 200px;
+            object-fit: contain;
+            padding: 20px;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+        }
+        
+        .bg-light-blue {
+            background-color: #e9f5fe;
+        }
+
+         .product-container {
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .product-image-container {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-image {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+        
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .thumbnail:hover {
+            border-color: #3498db;
+        }
+        
+        .product-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #3498db;
+            margin: 15px 0;
+        }
+        
+        .specs-table {
+            width: 100%;
+            margin-top: 30px;
+        }
+        
+        .specs-table th {
+            width: 30%;
+            text-align: left;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .specs-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .specs-table tr:last-child th,
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .action-buttons {
+            margin-top: 30px;
+        }
+        
+        .product-badge {
+            font-size: 0.9rem;
+            font-weight: normal;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="slike/logo.png" alt="D-Computers Logo">
+                <span class="fw-bold">D-Computers</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Domov</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="računalniki.html">Izdelki</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="company-support.html">Podpora</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="company-about.html">O nas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontakt.html">Kontakt</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="merch.html">Merch</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container product-container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product-image-container">
+                    <img src="https://img.cdn-cnj.si/img/800/800/lo/loVTwSlMArZ7.webp" class="product-image" id="mainImage" alt="D-Computers PRO">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h1>VIST PC Gaming Core i9 11900KF - RAM 32GB - RTX 4060 - SSD 1TB M.2 - WiFi6 - BT - W11</h1>
+                
+                <div class="mt-3">
+                    <span class="badge bg-success product-badge">Na zalogi</span>
+                    <span class="badge bg-primary product-badge">1 leto garancije</span>
+                    <span class="badge bg-info text-dark product-badge">Brezplačna dostava</span>
+                </div>
+                
+                <div class="product-price">1.499,99 €</div>
+                
+                <p class="lead">Zmogljiv poslovni računalnik z najnovejšo tehnologijo za zahtevne uporabnike.</p>
+                
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-check text-success me-2"></i>
+                    <span>Procesor: INTEL Core i9</span>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-check text-success me-2"></i>
+                    <span>Grafična kartica: NVIDIA GeForce RTX 4060</span>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-check text-success me-2"></i>
+                    <span>Pomnilnik: 32GB DDR4 </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-12">
+                <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button">Opis</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button">Specifikacije</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content p-3 border border-top-0 rounded-bottom" id="productTabsContent">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel">
+                        <h3>Opis izdelka</h3>
+                        <p>VIST PC Gaming Core i9 11900KF - RAM 32GB - RTX 4060 - SSD 1TB M.2 - WiFi6 - BT - W11 je visoko zmogljiv namizni računalnik, zasnovan za profesionalce in navdušence, ki zahtevajo vrhunsko zmogljivost. Z najnovejšimi komponentami in skrbno izbranimi deli zagotavlja nemerljivo delovanje pri najzahtevnejših aplikacijah.</p>
+                        
+                        <h4 class="mt-4">Ključne prednosti</h4>
+                        <ul>
+                            <li>Izjemna zmogljivost za profesionalno delo in gaming</li>
+                            <li>Tih in učinkovit hladilni sistem</li>
+                            <li>Kakovostne komponente izbrane za dolgo življenjsko dobo</li>
+                            <li>Enostavna nadgradnja in vzdrževanje</li>
+                            <li>Slikovit dizajn s pregledno ohišjem s steklenimi vrati</li>
+                        </ul>
+                        
+                        <h4 class="mt-4">Namensko uporabo</h4>
+                        <p>Idealen za:</p>
+                        <ul>
+                            <li>Video montažo in obdelavo slik</li>
+                            <li>3D modeliranje in renderiranje</li>
+                            <li>Razvoj programske opreme</li>
+                            <li>Zahtevne igre in virtualno resničnost</li>
+                            <li>Strokovne aplikacije za CAD/CAM</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="specs" role="tabpanel">
+                        <h3>Tehnične specifikacije</h3>
+                        <table class="specs-table">
+                            <tr>
+                                <th>Procesor</th>
+                                <td>Intel Core i9 11900KF</td>
+                            </tr>
+                            <tr>
+                                <th>Pomnilnik</th>
+                                <td>32GB DDR4 3200MHz (2x16GB)</td>
+                            </tr>
+                            <tr>
+                                <th>Grafična kartica</th>
+                                <td>NVIDIA GeForce RTX 4060</td>
+                            </tr>
+                            <tr>
+                                <th>Shramba</th>
+                                <td>1TB NVMe SSD (do 3500 MB/s) + 2TB HDD 7200 RPM</td>
+                            </tr>
+                            <tr>
+                                <th>Matična plošča</th>
+                                <td>ASUS PRIME Z690-P, Socket 1700</td>
+                            </tr>
+                            <tr>
+                                <th>Operacijski sistem</th>
+                                <td>Windows 11 Pro (64-bit)</td>
+                            </tr>
+                            <tr>
+                                <th>Napajalnik</th>
+                                <td>750W 80+ Gold, modularni</td>
+                            </tr>
+                            <tr>
+                                <th>Hlajenje</th>
+                                <td>CPU: Noctua NH-U12S, 2x 120mm ventilatorja v ohišju</td>
+                            </tr>
+                            <tr>
+                                <th>Povezljivost</th>
+                                <td>Wi-Fi 6, Bluetooth 5.2, Gigabit Ethernet, 2.5G Ethernet</td>
+                            </tr>
+                            <tr>
+                                <th>Vhodi/izhodi</th>
+                                <td>
+                                    Spredaj: 2x USB 3.2, 1x USB-C, audio<br>
+                                    Zadaj: 4x USB 3.2, 2x USB 2.0, 1x USB-C, HDMI, DisplayPort, 3x audio
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Ohišje</th>
+                                <td>Fractal Design Meshify C, črno steklo, RGB osvetlitev</td>
+                            </tr>
+                            <tr>
+                                <th>Dimenzije</th>
+                                <td>45 x 21 x 45 cm (Š x V x G)</td>
+                            </tr>
+                            <tr>
+                                <th>Teža</th>
+                                <td>12 kg</td>
+                            </tr>
+                            <tr>
+                                <th>Garancija</th>
+                                <td>12 mesecev (možnost razširitve)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4">D-Computers</h5>
+                    <p>Vodilna slovenska trgovina z računalniško opremo in dodatki.</p>
+                    <div class="mt-4">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4">Izdelki</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="računalniki.html" class="text-white-50">Namizni računalniki</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4">Podpora</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="company-FAQ.html" class="text-white-50">Pogosta vprašanja</a></li>
+                        <li class="mb-2"><a href="warrenty.html" class="text-white-50">Garancije</a></li>
+                        <li><a href="kontakt.html" class="text-white-50">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Kontakt</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Tržaška cesta 25, 1000 Ljubljana</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> 01 234 56 78</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@d-computers.si</li>
+                        <li><i class="fas fa-clock me-2"></i> Pn-Pt: 9:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4 bg-secondary">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-white-50">&copy; 2025 D-Computers. Vse pravice pridržane.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function changeImage(thumbnail) {
+            document.getElementById('mainImage').src = thumbnail.src;
+        }
+    </script>
+</body>
+</html>

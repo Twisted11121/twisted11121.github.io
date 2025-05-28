@@ -61,75 +61,87 @@
             background-color: #e9f5fe;
         }
 
-        .product-grid {
+         .product-container {
             margin-top: 30px;
             margin-bottom: 50px;
         }
         
-        .product-card {
+        .product-image-container {
             border: 1px solid #dee2e6;
             border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
             height: 100%;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            text-decoration: none;
-        }
-        
-        .product-image-container {
-            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            background-color: #f8f9fa;
         }
         
         .product-image {
-            max-height: 100%;
             max-width: 100%;
+            max-height: 400px;
             object-fit: contain;
         }
         
-        .product-info {
-            padding: 15px;
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
         }
         
-        .product-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #212529;
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .thumbnail:hover {
+            border-color: #3498db;
         }
         
         .product-price {
+            font-size: 28px;
             font-weight: bold;
             color: #3498db;
-            margin-bottom: 0;
+            margin: 15px 0;
+        }
+        
+        .specs-table {
+            width: 100%;
+            margin-top: 30px;
+        }
+        
+        .specs-table th {
+            width: 30%;
+            text-align: left;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .specs-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .specs-table tr:last-child th,
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .action-buttons {
+            margin-top: 30px;
         }
         
         .product-badge {
-            font-size: 0.8rem;
-            margin-right: 5px;
+            font-size: 0.9rem;
+            font-weight: normal;
+            margin-right: 8px;
         }
-        
-        .filter-section {
-            margin-bottom: 30px;
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-        }
-        
-        .breadcrumb {
-            background-color: transparent;
-            padding-left: 0;
-        }
-
     </style>
 </head>
 <body>
@@ -168,107 +180,105 @@
     </nav>
 
 
-
-
-    <div class="container product-grid">
+    <div class="container product-container">
         <div class="row">
-            <div class="col-md-4 col-sm-6 mb-4">
-                <a href="racunalnik1.html" class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://img.cdn-cnj.si/img/800/800/lo/loVTwSlMArZ7.webp" class="product-image" alt="D-Computers PRO">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">VIST PC Gaming</h3>
-                        <div class="mb-2">
-                            <span class="badge bg-success product-badge">Na zalogi</span>
-                            <span class="badge bg-primary product-badge">Garancija 1 leti</span>
-                        </div>
-                        <p class="product-price">1.499,99 €</p>
-                    </div>
-                </a>
+            <div class="col-md-6">
+                <div class="product-image-container">
+                    <img src="https://img.cdn-cnj.si/img/800/800/J0/J0Iy14cjkE4b.webp" class="product-image" id="mainImage" alt="D-Computers PRO">
+                </div>
             </div>
-            
-            <div class="col-md-4 col-sm-6 mb-4">
-                <a href="racunalnik2.html" class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://img.cdn-cnj.si/img/800/800/nm/nmzopJ5UdTzr.webp" class="product-image" alt="Gaming Master">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">VIST Creator Pro 1</h3>
-                        <div class="mb-2">
-                            <span class="badge bg-success product-badge">Na zalogi</span>
-                            <span class="badge bg-primary product-badge">Garancija 1 leta</span>
-                        </div>
-                        <p class="product-price">1.199,99 €</p>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="col-md-4 col-sm-6 mb-4">
-                <a href="racunalnik3.html" class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://img.cdn-cnj.si/img/800/800/J0/J0Iy14cjkE4b.webp" class="product-image" alt="Office Pro">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">VIST Creator Pro 2</h3>
-                        <div class="mb-2">
-                            <span class="badge bg-warning text-dark product-badge">Zadnji kosi</span>
-                            <span class="badge bg-primary product-badge">Garancija 1 leti</span>
-                        </div>
-                        <p class="product-price">899,99 €</p>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="col-md-4 col-sm-6 mb-4">
-                <a href="racunalnik4.html" class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://img.cdn-cnj.si/img/800/800/pL/pLisH14KCPhA.webp" class="product-image" alt="Mini PC">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">IST Stealth Gaming</h3>
-                        <div class="mb-2">
-                            <span class="badge bg-success product-badge">Na zalogi</span>
-                            <span class="badge bg-primary product-badge">Garancija 1 leti</span>
-                        </div>
-                        <p class="product-price">1.299,99 €</p>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="col-md-4 col-sm-6 mb-4">
-                <a href="racunalnik5.html" class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://img.cdn-cnj.si/img/800/800/aO/aO33YOlihFP.webp" class="product-image" alt="Workstation">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">VIST AI Workstation</h3>
-                        <div class="mb-2">
-                            <span class="badge bg-danger product-badge">Po naročilu</span>
-                            <span class="badge bg-primary product-badge">Garancija 1 leta</span>
-                        </div>
-                        <p class="product-price">3.499,99 €</p>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="col-md-4 col-sm-6 mb-4">
-                <a href="racunalnik6.html" class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://www.bigbang.si/upload/catalog/product/1643812/86a8ad0c4ae9e27015cae6ad7fe29351fdbab7b8_677d23f85b6fb.jpg" class="product-image" alt="Student Edition">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">VIST Studio Mini</h3>
-                        <div class="mb-2">
-                            <span class="badge bg-success product-badge">Na zalogi</span>
-                            <span class="badge bg-primary product-badge">Garancija 1 leti</span>
-                        </div>
-                        <p class="product-price">1.000 €</p>
-                    </div>
-                </a>
+
+            <div class="col-md-6">
+                <h1>VIST Creator Pro Ryzen 9 7950X - RAM 64GB - RTX 4070 - SSD 2TB M.2 - WiFi6E - BT - W11 Pro</h1>
+                
+                <div class="mt-3">
+                    <span class="badge bg-success product-badge">Na zalogi</span>
+                    <span class="badge bg-primary product-badge">1 leto garancije</span>
+                    <span class="badge bg-info text-dark product-badge">Brezplačna dostava</span>
+                </div>
+                
+                <div class="product-price">899,99 €</div>
+                
+                <p class="lead">Zmogljiv poslovni računalnik z najnovejšo tehnologijo za zahtevne uporabnike.</p>
+                
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-check text-success me-2"></i>
+                    <span>Procesor: Ryzen 9 7950X</span>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-check text-success me-2"></i>
+                    <span>Grafična kartica: NVIDIA GeForce RTX 407</span>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-check text-success me-2"></i>
+                    <span>Pomnilnik: 64GB DDR4 </span>
+                </div>
             </div>
         </div>
         
+        <div class="row mt-5">
+            <div class="col-12">
+                <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button">Opis</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button">Specifikacije</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content p-3 border border-top-0 rounded-bottom" id="productTabsContent">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel">
+                        <h3>Opis izdelka</h3>
+                        <p>VIST Creator Pro Ryzen 9 7950X - RAM 64GB - RTX 4070 - SSD 2TB M.2 - WiFi6E - BT - W11 Pro je vrhunski sistem za ustvarjalce vsebin, ki potrebujejo hitrost, stabilnost in zmogljivost pri najzahtevnejših projektih.</p>
+
+                        <h4 class="mt-4">Ključne prednosti</h4>
+                        <ul>
+                            <li>Izjemna zmogljivost za večopravilnost in produkcijo</li>
+                            <li>Napredno AIO hlajenje</li>
+                            <li>Hitro NVMe shranjevanje za takojšen dostop</li>
+                            <li>Vrhunski DDR5 pomnilnik</li>
+                            <li>Profesionalna zasnova s čistim RGB izgledom</li>
+                        </ul>
+
+                        <h4 class="mt-4">Namensko uporabo</h4>
+                        <p>Idealen za:</p>
+                        <ul>
+                            <li>Video produkcijo v 4K/8K</li>
+                            <li>Animacijo in 3D oblikovanje</li>
+                            <li>Razvoj aplikacij in testna okolja</li>
+                            <li>Strojno učenje</li>
+                            <li>Ustvarjalne profesionalce</li>
+                        </ul>
+                        </div>
+
+                        <div class="tab-pane fade" id="specs" role="tabpanel">
+                        <h3>Tehnične specifikacije</h3>
+                        <table class="specs-table">
+                        <tr><th>Procesor</th><td>AMD Ryzen 9 7950X</td></tr>
+                        <tr><th>Pomnilnik</th><td>64GB DDR5 6000MHz (2x32GB)</td></tr>
+                        <tr><th>Grafična kartica</th><td>NVIDIA RTX 4070 12GB</td></tr>
+                        <tr><th>Shramba</th><td>2TB NVMe Gen4 SSD + 4TB HDD</td></tr>
+                        <tr><th>Matična plošča</th><td>ASUS X670E ProArt Creator</td></tr>
+                        <tr><th>Operacijski sistem</th><td>Windows 11 Pro</td></tr>
+                        <tr><th>Napajalnik</th><td>850W 80+ Platinum, modularni</td></tr>
+                        <tr><th>Hlajenje</th><td>360mm AIO vodno hlajenje, ARGB</td></tr>
+                        <tr><th>Povezljivost</th><td>Wi-Fi 6E, BT 5.3, 2.5G Ethernet</td></tr>
+                        <tr><th>Vhodi/izhodi</th><td>
+                        Spredaj: 2x USB 3.2, 1x USB-C, audio<br>
+                        Zadaj: 6x USB 3.2, 2x USB 2.0, 1x USB-C, HDMI, DP, 5x audio, LAN
+                        </td></tr>
+                        <tr><th>Ohišje</th><td>Fractal North, oreh les + mreža</td></tr>
+                        <tr><th>Dimenzije</th><td>46 x 21 x 47 cm</td></tr>
+                        <tr><th>Teža</th><td>13.2 kg</td></tr>
+                        <tr><th>Garancija</th><td>24 mesecev</td></tr>
+                        </table>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="py-5">
         <div class="container">
@@ -322,5 +332,10 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function changeImage(thumbnail) {
+            document.getElementById('mainImage').src = thumbnail.src;
+        }
+    </script>
 </body>
 </html>
