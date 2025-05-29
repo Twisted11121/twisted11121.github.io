@@ -60,6 +60,64 @@
         .bg-light-blue {
             background-color: #e9f5fe;
         }
+
+        .faq-hero {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 40px;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        
+        .faq-category {
+            margin-bottom: 40px;
+        }
+        
+        .faq-category h2 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .accordion-item {
+            margin-bottom: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .accordion-button {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: #e9f5fe;
+            color: #2c3e50;
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(52, 152, 219, 0.25);
+        }
+        
+        .contact-promo {
+            background-color: #e9f5fe;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .search-box {
+            margin-bottom: 30px;
+        }
+
     </style>
 </head>
 <body>
@@ -95,7 +153,218 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav>  
+
+    <section class="faq-hero">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">Pogosta vprašanja</h1>
+            <p class="lead">Tukaj najdete odgovore na najpogostejša vprašanja naših strank</p>
+        </div>
+    </section>
+
+    <div class="container search-box">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control form-control-lg" placeholder="Iščite med pogostimi vprašanji...">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container faq-container">
+        <div class="faq-category">
+            <h2><i class="fas fa-shopping-cart me-2"></i> Nakupovanje</h2>
+            <div class="accordion" id="purchaseAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#purchase1">
+                            Kako lahko naročim izdelek?
+                        </button>
+                    </h3>
+                    <div id="purchase1" class="accordion-collapse collapse" data-bs-parent="#purchaseAccordion">
+                        <div class="accordion-body">
+                            <p>Izdelek lahko naročite preko našega spletnega mesta z izpolnitvijo naročilnice ali pa nas kontaktirate telefonsko na številko 01 234 56 78. Poleg tega vas lahko naši prodajalci posvetujejo tudi v eni izmed naših poslovalnic.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#purchase2">
+                            Katere načine plačila sprejemate?
+                        </button>
+                    </h3>
+                    <div id="purchase2" class="accordion-collapse collapse" data-bs-parent="#purchaseAccordion">
+                        <div class="accordion-body">
+                            <p>Sprejemamo naslednje načine plačila:</p>
+                            <ul>
+                                <li>Kreditne in debetne kartice (Visa, Mastercard, Maestro)</li>
+                                <li>Banjsko nakazilo (predračun)</li>
+                                <li>Plačilo po povzetju (ob dostavi)</li>
+                                <li>Leasing prek partnerjev</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#purchase3">
+                            Ali ponujate možnost obročnega plačila?
+                        </button>
+                    </h3>
+                    <div id="purchase3" class="accordion-collapse collapse" data-bs-parent="#purchaseAccordion">
+                        <div class="accordion-body">
+                            <p>Da, v sodelovanju z več bankami in finančnimi institucijami ponujamo možnost obročnega plačila. Obrok lahko odložite v 12, 24 ali 36 mesečnih obrokih, odvisno od izbranega partnerja. Za več informacij nas kontaktirajte.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-category">
+            <h2><i class="fas fa-truck me-2"></i> Dostava</h2>
+            <div class="accordion" id="deliveryAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#delivery1">
+                            Kakšen je rok dostave?
+                        </button>
+                    </h3>
+                    <div id="delivery1" class="accordion-collapse collapse" data-bs-parent="#deliveryAccordion">
+                        <div class="accordion-body">
+                            <p>Standardni rok dostave je 2-3 delovne dni za izdelke na zalogi. Za posebne naročila ali izdelke, ki niso na zalogi, vas bomo obvestili o predvidenem roku dostave ob oddaji naročila.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#delivery2">
+                            Ali je dostava brezplačna?
+                        </button>
+                    </h3>
+                    <div id="delivery2" class="accordion-collapse collapse" data-bs-parent="#deliveryAccordion">
+                        <div class="accordion-body">
+                            <p>Da, za vsa naročila nad 100 € je dostava brezplačna. Za naročila pod to vrednostjo strošek dostave znaša 5,99 €. Izjema so težki in krhki izdelki, kjer lahko strošek dostave variira.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#delivery3">
+                            Ali dostavljate tudi na dom?
+                        </button>
+                    </h3>
+                    <div id="delivery3" class="accordion-collapse collapse" data-bs-parent="#deliveryAccordion">
+                        <div class="accordion-body">
+                            <p>Da, vse izdelke dostavimo na vaš dom ali pa jih lahko prevzamete v eni izmed naših poslovalnic. Pri dostavi na dom boste prejeli obvestilo o predvidenem času dostave.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-category">
+            <h2><i class="fas fa-exchange-alt me-2"></i> Vračila in garancije</h2>
+            <div class="accordion" id="returnAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#return1">
+                            Kakšna je politika vračil?
+                        </button>
+                    </h3>
+                    <div id="return1" class="accordion-collapse collapse" data-bs-parent="#returnAccordion">
+                        <div class="accordion-body">
+                            <p>V skladu s pravnimi predpisi imate pravico do vračila izdelka v roku 14 dni brez pojasnila razloga. Izdelek mora biti v originalni embalaži z vsemi pripadajočimi dokumenti in dodatki. Stroške vračila krije stranka, razen če gre za napako na naši strani.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#return2">
+                            Kakšno je garancijsko obdobje na izdelke?
+                        </button>
+                    </h3>
+                    <div id="return2" class="accordion-collapse collapse" data-bs-parent="#returnAccordion">
+                        <div class="accordion-body">
+                            <p>Standardna garancija na naše izdelke je 1 leto, razen če proizvajalec določa daljše garancijsko obdobje. Za podrobnosti o garanciji za posamezen izdelek si oglejte <a href="warrenty.html">stran z garancijami</a>.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#return3">
+                            Kako uveljavim garancijo?
+                        </button>
+                    </h3>
+                    <div id="return3" class="accordion-collapse collapse" data-bs-parent="#returnAccordion">
+                        <div class="accordion-body">
+                            <p>Za uveljavljanje garancije nas kontaktirajte na podporo ali prinesite izdelek v eno izmed naših poslovalnic. Potrebovali boste dokazilo o nakupu (račun) in garancijski list. Po pregledu bomo določili najustreznejšo rešitev.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-category">
+            <h2><i class="fas fa-tools me-2"></i> Tehnična podpora</h2>
+            <div class="accordion" id="supportAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#support1">
+                            Kako lahko rešim težave z izdelkom?
+                        </button>
+                    </h3>
+                    <div id="support1" class="accordion-collapse collapse" data-bs-parent="#supportAccordion">
+                        <div class="accordion-body">
+                            <p>Za večino izdelkov ponujamo spletna navodila za odpravljanje težav. Če težave ne morete odpraviti sami, nas lahko kontaktirate na tehnično podporo pod številko 01 234 56 79 ali pa izdelek prinesete v eno izmed naših servisnih centrov.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#support2">
+                            Kakšni so roki za popravila?
+                        </button>
+                    </h3>
+                    <div id="support2" class="accordion-collapse collapse" data-bs-parent="#supportAccordion">
+                        <div class="accordion-body">
+                            <p>Standardni rok za popravila je 5-10 delovnih dni, odvisno od kompleksnosti težave in razpoložljivosti rezervnih delov. Za nujne primere ponujamo hitrejše storitve z dodatnimi stroški.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#support3">
+                            Ali ponujate možnost nadgradnje izdelkov?
+                        </button>
+                    </h3>
+                    <div id="support3" class="accordion-collapse collapse" data-bs-parent="#supportAccordion">
+                        <div class="accordion-body">
+                            <p>Da, za večino naših izdelkov ponujamo storitve nadgradnje. Naši strokovnjaki vam lahko svetujejo glede najboljših možnosti za posodobitev vaše opreme. Kontaktirajte nas za več informacij.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-promo">
+            <h3>Niste našli odgovora na svoje vprašanje?</h3>
+            <p class="lead">Naš team vam je vedno na voljo za dodatno pomoč in informacije.</p>
+            <a href="kontakt.html" class="btn btn-primary btn-lg mt-3">Kontaktirajte nas</a>
+        </div>
+    </div>
+
 
     <footer class="py-5">
         <div class="container">

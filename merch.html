@@ -61,38 +61,37 @@
             background-color: #e9f5fe;
         }
 
-        #galerija{
-            grid-column: 1;
-            grid-row: 2;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        #galerija {
             margin: auto;
-            width: 750px;
+            width: 1000px;
             margin-top: 50px;
             margin-bottom: 70px;
         }
 
-        #ul-galerija{
-            display: flex;
-            flex-wrap: wrap;
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        #galerija table {
+            border-collapse: collapse;
         }
 
-        #slika{
+        #galerija td {
             padding: 10px;
             margin: 10px;
             background-color: #f1f1f1;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s;
+            text-align: center;
         }
 
-        #slika:hover {
+        #galerija td:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
+
+        #galerija img {
+            max-width: 150px;
+            height: auto;
+            margin: 0 auto;
+        }
+
 
     </style>
 </head>
@@ -132,44 +131,23 @@
     </nav>
 
 
-    <div id="galerija">
-
-        <ul id="ul-galerija">
-
-            <li id="slika">
-                <img src="slike/arnika.jpg" alt="" title="arnika">
-                <p>test</p>
-            </li>
-            <li id="slika">
-                <img src="slike/crna-murka.jpg" alt="" title="crna murka">
-            </li>
-            <li id="slika">
-                <img src="slike/kranjska-lilija.jpg" alt="" title="kranjska lilija">
-            </li>
-            <li id="slika">
-                <img src="slike/kranjski-jeglic.jpg" alt="" title="kranjski jeglic">
-            </li>
-            <li id="slika">
-                <img src="slike/planika.jpg" alt="" title="planika">
-            </li>
-            <li id="slika">
-                <img src="slike/svisc.jpg" alt="" title="svisc">
-            </li>
-            <li id="slika">
-                <img src="slike/triglavska-neboglasnica.jpg" alt="" title="triglavska neboglasnica">
-            </li>
-            <li id="slika">
-                <img src="slike/triglavska-roza.jpg" alt="" title="triglavska roza">
-            </li>
-            <li id="slika">
-                <img src="slike/zisova-zvoncnica.jpg" alt="" title="zisova zvoncnica">
-            </li>
-
-
-
-        </ul>
-
-    </div>
+    <table id="galerija">
+        <tr>
+            <td><img src="https://images.pexels.com/photos/25749259/pexels-photo-25749259/free-photo-of-close-up-of-clothes-hanging-on-a-rack-in-a-clothing-store.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" title="arnika"></td>
+            <td><img src="https://images.pexels.com/photos/20669538/pexels-photo-20669538/free-photo-of-hand-holds-hanger-with-t-shirt.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" title="crna murka"></td>
+            <td><img src="https://images.pexels.com/photos/9558265/pexels-photo-9558265.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" title="kranjska lilija"></td>
+        </tr>
+        <tr>
+            <td><img src="https://images.pexels.com/photos/9594694/pexels-photo-9594694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" title="kranjski jeglic"></td>
+            <td><img src="https://images.pexels.com/photos/6786666/pexels-photo-6786666.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" alt="" title="planika"></td>
+            <td><img src="https://images.pexels.com/photos/8386653/pexels-photo-8386653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" title="svisc"></td>
+        </tr>
+        <tr>
+            <td><img src="https://images.pexels.com/photos/16470015/pexels-photo-16470015/free-photo-of-clothes-racks-at-store.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" title="triglavska neboglasnica"></td>
+            <td><img src="https://images.pexels.com/photos/6046231/pexels-photo-6046231.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" title="triglavska roza"></td>
+            <td><img src="https://images.pexels.com/photos/5734462/pexels-photo-5734462.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" title="zisova zvoncnica"></td>
+        </tr>
+    </table>
 
 
 

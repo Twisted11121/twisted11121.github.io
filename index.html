@@ -63,7 +63,9 @@
     </style>
 </head>
 <body>
+    <audio id="my-audio" src="audio/audio.mp3"></audio>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="slike/logo.png" alt="D-Computers Logo">
@@ -78,19 +80,19 @@
                         <a class="nav-link" href="index.html">Domov</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="računalniki.html">Izdelki</a>
+                        <a class="nav-link" onclick="playAndRedirect(event, 'audio/audio.mp3', 'računalniki.html')" href="računalniki.html">Izdelki</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="company-support.html">Podpora</a>
+                        <a class="nav-link" onclick="playAndRedirect(event, 'audio/audio.mp3', 'company-support.html')" href="company-support.html">Podpora</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="company-about.html">O nas</a>
+                        <a class="nav-link" onclick="playAndRedirect(event, 'audio/audio.mp3', 'company-about.html')" href="company-about.html">O nas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="kontakt.html">Kontakt</a>
+                        <a class="nav-link" onclick="playAndRedirect(event, 'audio/audio.mp3', 'kontakt.html')" href="kontakt.html">Kontakt</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="merch.html">Merch</a>
+                        <a class="nav-link" onclick="playAndRedirect(event, 'audio/audio.mp3', 'merch.html')" href="merch.html">Merch</a>
                     </li>
                 </ul>
             </div>
@@ -213,6 +215,7 @@
                         <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <canvas id="gradientCanvas" class="ms-2" width="20" height="20"></canvas>
                     </div>
                 </div>
                 
@@ -255,4 +258,29 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+
+<script>
+        const canvas = document.getElementById('gradientCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const gradient = ctx.createLinearGradient(0, canvas.height, canvas.width, 0);
+        gradient.addColorStop(0, '#3498db');
+        gradient.addColorStop(1, '#2c3e50');
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+</script>
+
+<script>
+function playAndRedirect(event, audioSrc, url) {
+    event.preventDefault();
+    const audio = new Audio(audioSrc);
+    audio.play();
+    audio.onended = () => {
+        window.location.href = url;
+    };
+}
+</script>
+
 </html>
