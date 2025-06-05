@@ -130,11 +130,15 @@
             padding-left: 0;
         }
 
+        .container-fluid{
+            overflow: hidden;
+        }
+
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-        <div class="container">
+        <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="slike/logo.png" alt="D-Computers Logo">
                 <span class="fw-bold">D-Computers</span>
@@ -167,10 +171,16 @@
         </div>
     </nav>
 
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Izberite svoj popoln računalnik</h1>
+            <p class="lead mb-4">Izberi zanesljivost, moč in stil – vse na enem mestu.</p>
+        </div>
+    </section>
 
 
 
-    <div class="container product-grid">
+    <div class="container-fluid product-grid p-0 m-0">
         <div class="row">
             <div class="col-md-4 col-sm-6 mb-4">
                 <a href="racunalnik1.html" class="product-card">
@@ -271,7 +281,7 @@
         
 
     <footer class="py-5">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                     <h5 class="text-white mb-4">D-Computers</h5>
@@ -321,6 +331,7 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </html>
