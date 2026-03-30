@@ -3,106 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Android Java UI Documentation</title>
+    <title>Android Java UI & Logic Documentation</title>
     <style>
         :root {
-            --primary: #3DDC84; /* Android Green */
-            --dark: #073042;
-            --light: #eff1f3;
-            --code-bg: #282c34;
-            --text: #333;
-            --accent: #01579b;
+            --android-green: #3DDC84; 
+            --navy: #073042;
+            --bg-gray: #f4f7f9;
+            --code-block: #2b2b2b;
+            --text-main: #202124;
+            --accent-blue: #1a73e8;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
             margin: 0;
             display: flex;
-            background: var(--light);
+            background: var(--bg-gray);
+            color: var(--text-main);
         }
 
-        /* Sidebar Navigation */
+        /* Sidebar Styling */
         nav {
-            width: 280px;
+            width: 300px;
             height: 100vh;
-            background: var(--dark);
+            background: var(--navy);
             color: white;
             position: fixed;
-            padding: 20px;
+            padding: 25px;
             box-sizing: border-box;
             overflow-y: auto;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
         }
 
-        nav h2 { color: var(--primary); font-size: 1.2rem; margin-bottom: 20px; }
+        nav h2 { color: var(--android-green); margin-bottom: 25px; font-size: 1.4rem; }
 
         #searchBar {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 25px;
+            border-radius: 8px;
             border: none;
-            box-sizing: border-box;
+            background: rgba(255,255,255,0.1);
+            color: white;
         }
 
         nav ul { list-style: none; padding: 0; }
-        nav ul li { margin: 12px 0; }
-        nav ul li a {
-            color: #ccc;
-            text-decoration: none;
-            transition: 0.3s;
-            font-size: 0.95rem;
-        }
-        nav ul li a:hover { color: var(--primary); padding-left: 5px; }
+        nav ul li { margin: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; }
+        nav ul li a { color: #bdc1c6; text-decoration: none; transition: 0.2s; font-size: 0.95rem; }
+        nav ul li a:hover { color: var(--android-green); }
 
-        /* Main Content Area */
+        /* Content Area */
         main {
-            margin-left: 280px;
-            padding: 40px;
+            margin-left: 300px;
+            padding: 50px;
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
         }
 
-        .card {
+        .section-card {
             background: white;
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--primary);
+            padding: 35px;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
         }
 
-        h1 { color: var(--dark); border-bottom: 3px solid var(--primary); display: inline-block; margin-bottom: 30px;}
-        h2 { color: var(--dark); margin-top: 0; display: flex; align-items: center; justify-content: space-between;}
+        h1 { font-size: 2.5rem; color: var(--navy); margin-top: 0; }
+        h2 { color: var(--navy); border-left: 5px solid var(--android-green); padding-left: 15px; margin-bottom: 20px; }
 
-        /* Code Block Styling */
         pre {
-            background: var(--code-bg);
-            color: #abb2bf;
-            padding: 18px;
-            border-radius: 8px;
+            background: var(--code-block);
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
             overflow-x: auto;
-            font-family: 'Fira Code', 'Consolas', monospace;
-            font-size: 0.85rem;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.9rem;
             line-height: 1.5;
         }
 
-        .label {
+        .tag {
             display: inline-block;
-            background: #e1f5fe;
-            color: var(--accent);
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 5px 12px;
+            border-radius: 6px;
             font-size: 0.75rem;
             font-weight: bold;
             margin-bottom: 10px;
             text-transform: uppercase;
         }
+        .tag-java { background: #e8f0fe; color: #1967d2; }
+        .tag-manifest { background: #fef7e0; color: #c5221f; }
 
-        .xml-label { background: #fff3e0; color: #e65100; }
-
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             nav { width: 100%; height: auto; position: relative; }
             body { flex-direction: column; }
             main { margin-left: 0; padding: 20px; }
@@ -112,98 +104,87 @@
 <body>
 
 <nav>
-    <h2>Android Docs</h2>
-    <input type="text" id="searchBar" placeholder="Search components..." onkeyup="filterMenu()">
-    <ul id="menuList">
+    <h2>Android Dev Guide</h2>
+    <input type="text" id="searchBar" placeholder="Search topics..." onkeyup="search()">
+    <ul id="menu">
+        <li><a href="#sharedprefs">SharedPreferences</a></li>
+        <li><a href="#broadcast">BroadcastReceiver</a></li>
+        <li><a href="#calendar">CalendarView to String</a></li>
         <li><a href="#menuinflator">Menu Inflator</a></li>
-        <li><a href="#basics">TextView & Button</a></li>
-        <li><a href="#selection">RadioButtons</a></li>
-        <li><a href="#seekbar">SeekBar</a></li>
         <li><a href="#listview">ListView & Adapter</a></li>
         <li><a href="#webview">WebView</a></li>
-        <li><a href="#calendar">CalendarView</a></li>
     </ul>
 </nav>
 
 <main>
-    <h1>Java UI Reference Guide</h1>
+    <h1>Reference Documentation</h1>
 
-    <section id="menuinflator" class="card" style="border-left-color: #ff9800;">
-        <h2>Menu Inflator</h2>
-        <p>Used to render menu items from an XML resource into the Action Bar or Popup Menu.</p>
+    <section id="sharedprefs" class="section-card">
+        <h2>SharedPreferences</h2>
+        <p>Use this to save small amounts of primitive data (like settings or scores) that persist even after the app is closed.</p>
         
-        <span class="label xml-label">XML (res/menu/main_menu.xml)</span>
+        <span class="tag tag-java">Writing Data</span>
         <pre>
-&lt;menu xmlns:android="http://schemas.android.com/apk/res/android"&gt;
-    &lt;item 
-        android:id="@+id/action_settings"
-        android:title="Settings" /&gt;
-&lt;/menu&gt;</pre>
+SharedPreferences pref = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+SharedPreferences.Editor editor = pref.edit();
 
-        <span class="label">JAVA (Inside Activity)</span>
+editor.putString("username", "JohnDoe");
+editor.putInt("user_level", 5);
+editor.apply(); // Saves asynchronously</pre>
+
+        <span class="tag tag-java">Reading Data</span>
         <pre>
-@Override
-public boolean onCreateOptionsMenu(Menu menu) {
-    MenuInflater inflater = getMenuInflater();
-    inflater.inflate(R.menu.main_menu, menu);
-    return true;
-}
-
-@Override
-public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == R.id.action_settings) {
-        // Handle settings click
-        return true;
-    }
-    return super.onOptionsItemSelected(item);
-}</pre>
+SharedPreferences pref = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+String name = pref.getString("username", "Guest"); // "Guest" is the default value
+int level = pref.getInt("user_level", 0);</pre>
     </section>
 
-    <section id="basics" class="card">
-        <h2>TextView & Button</h2>
-        <span class="label">JAVA</span>
+    <section id="broadcast" class="section-card">
+        <h2>BroadcastReceiver</h2>
+        <p>Enables the app to receive intents broadcast by the system or other apps (e.g., "Battery Low").</p>
+        
+        <span class="tag tag-java">Java Class</span>
         <pre>
-TextView myText = findViewById(R.id.textView);
-Button myBtn = findViewById(R.id.button);
-
-myBtn.setOnClickListener(v -> myText.setText("Clicked!"));</pre>
-    </section>
-
-    <section id="selection" class="card">
-        <h2>RadioButtons & Group</h2>
-        <span class="label">JAVA</span>
-        <pre>
-RadioGroup group = findViewById(R.id.radioGroup);
-group.setOnCheckedChangeListener((rg, id) -> {
-    RadioButton rb = findViewById(id);
-    String val = rb.getText().toString();
-});</pre>
-    </section>
-
-    <section id="seekbar" class="card">
-        <h2>SeekBar</h2>
-        <span class="label">JAVA</span>
-        <pre>
-SeekBar sb = findViewById(R.id.seekBar);
-sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+public class MyReceiver extends BroadcastReceiver {
     @Override
-    public void onProgressChanged(SeekBar s, int p, boolean b) {
-        // p = current value
+    public void onReceive(Context context, Intent intent) {
+        if (Intent.ACTION_AIRPLANE_MODE_CHANGED.equals(intent.getAction())) {
+            Toast.makeText(context, "Airplane Mode Changed", Toast.LENGTH_SHORT).show();
+        }
     }
-    @Override public void onStartTrackingTouch(SeekBar s) {}
-    @Override public void onStopTrackingTouch(SeekBar s) {}
+}</pre>
+
+        <span class="tag tag-manifest">AndroidManifest.xml</span>
+        <pre>
+&lt;receiver android:name=".MyReceiver" android:exported="true"&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.AIRPLANE_MODE" /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;</pre>
+    </section>
+
+    <section id="calendar" class="section-card">
+        <h2>CalendarView to String</h2>
+        <p>Convert the selected date into a formatted string for display.</p>
+        <span class="tag tag-java">Java Implementation</span>
+        <pre>
+calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+    // Month is 0-indexed: January = 0, February = 1
+    String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+    textView.setText(selectedDate);
 });</pre>
     </section>
 
-    <section id="listview" class="card">
+    <section id="listview" class="section-card">
         <h2>ListView & Adapter</h2>
-        <span class="label">JAVA</span>
+        <p>The standard way to display scrollable data rows.</p>
+        <span class="tag tag-java">Java Implementation</span>
         <pre>
-ListView lv = findViewById(R.id.listView);
-String[] names = {"Alice", "Bob", "Charlie"};
+ListView lv = findViewById(R.id.myList);
+String[] items = {"Item 1", "Item 2", "Item 3"};
 
 ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;&gt;(this, 
-    android.R.layout.simple_list_item_1, names);
+    android.R.layout.simple_list_item_1, items);
 
 lv.setAdapter(adapter);</pre>
     </section>
@@ -211,13 +192,14 @@ lv.setAdapter(adapter);</pre>
 </main>
 
 <script>
-    function filterMenu() {
+    function search() {
         let input = document.getElementById('searchBar').value.toLowerCase();
-        let items = document.getElementById('menuList').getElementsByTagName('li');
-        
-        for (let i = 0; i < items.length; i++) {
-            let text = items[i].innerText.toLowerCase();
-            items[i].style.display = text.includes(input) ? "" : "none";
+        let menuItems = document.getElementById('menu').getElementsByTagName('li');
+        let sections = document.getElementsByClassName('section-card');
+
+        for (let i = 0; i < menuItems.length; i++) {
+            let text = menuItems[i].innerText.toLowerCase();
+            menuItems[i].style.display = text.includes(input) ? "" : "none";
         }
     }
 </script>
