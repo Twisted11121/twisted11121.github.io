@@ -11,6 +11,7 @@
             --light: #eff1f3;
             --code-bg: #282c34;
             --text: #333;
+            --accent: #01579b;
         }
 
         body {
@@ -24,7 +25,7 @@
 
         /* Sidebar Navigation */
         nav {
-            width: 250px;
+            width: 280px;
             height: 100vh;
             background: var(--dark);
             color: white;
@@ -34,74 +35,72 @@
             overflow-y: auto;
         }
 
-        nav h2 { color: var(--primary); font-size: 1.2rem; }
+        nav h2 { color: var(--primary); font-size: 1.2rem; margin-bottom: 20px; }
+
+        #searchBar {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: none;
+            box-sizing: border-box;
+        }
 
         nav ul { list-style: none; padding: 0; }
-
-        nav ul li { margin: 15px 0; }
-
+        nav ul li { margin: 12px 0; }
         nav ul li a {
             color: #ccc;
             text-decoration: none;
             transition: 0.3s;
+            font-size: 0.95rem;
         }
-
-        nav ul li a:hover { color: var(--primary); }
+        nav ul li a:hover { color: var(--primary); padding-left: 5px; }
 
         /* Main Content Area */
         main {
-            margin-left: 250px;
+            margin-left: 280px;
             padding: 40px;
             width: 100%;
-            max-width: 1000px;
+            max-width: 900px;
         }
 
         .card {
             background: white;
-            padding: 25px;
+            padding: 30px;
             margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
         }
 
-        h1 { color: var(--dark); border-bottom: 3px solid var(--primary); display: inline-block; }
-        h2 { color: var(--dark); margin-top: 0; }
+        h1 { color: var(--dark); border-bottom: 3px solid var(--primary); display: inline-block; margin-bottom: 30px;}
+        h2 { color: var(--dark); margin-top: 0; display: flex; align-items: center; justify-content: space-between;}
 
         /* Code Block Styling */
         pre {
             background: var(--code-bg);
             color: #abb2bf;
-            padding: 15px;
-            border-radius: 5px;
+            padding: 18px;
+            border-radius: 8px;
             overflow-x: auto;
-            font-family: 'Consolas', monospace;
-            font-size: 0.9rem;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
         }
 
         .label {
             display: inline-block;
             background: #e1f5fe;
-            color: #01579b;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
             font-weight: bold;
             margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th { background-color: var(--primary); color: var(--dark); }
+        .xml-label { background: #fff3e0; color: #e65100; }
 
         @media (max-width: 768px) {
             nav { width: 100%; height: auto; position: relative; }
@@ -114,7 +113,9 @@
 
 <nav>
     <h2>Android Docs</h2>
-    <ul>
+    <input type="text" id="searchBar" placeholder="Search components..." onkeyup="filterMenu()">
+    <ul id="menuList">
+        <li><a href="#menuinflator">Menu Inflator</a></li>
         <li><a href="#basics">TextView & Button</a></li>
         <li><a href="#selection">RadioButtons</a></li>
         <li><a href="#seekbar">SeekBar</a></li>
@@ -126,46 +127,68 @@
 
 <main>
     <h1>Java UI Reference Guide</h1>
-    <p>Quick-start snippets for common Android Studio components.</p>
+
+    <section id="menuinflator" class="card" style="border-left-color: #ff9800;">
+        <h2>Menu Inflator</h2>
+        <p>Used to render menu items from an XML resource into the Action Bar or Popup Menu.</p>
+        
+        <span class="label xml-label">XML (res/menu/main_menu.xml)</span>
+        <pre>
+&lt;menu xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+    &lt;item 
+        android:id="@+id/action_settings"
+        android:title="Settings" /&gt;
+&lt;/menu&gt;</pre>
+
+        <span class="label">JAVA (Inside Activity)</span>
+        <pre>
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.main_menu, menu);
+    return true;
+}
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.action_settings) {
+        // Handle settings click
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
+}</pre>
+    </section>
 
     <section id="basics" class="card">
         <h2>TextView & Button</h2>
-        <p>The core interaction pair. Use <code>findViewById</code> to link the Java logic to XML.</p>
         <span class="label">JAVA</span>
         <pre>
 TextView myText = findViewById(R.id.textView);
 Button myBtn = findViewById(R.id.button);
 
-myBtn.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        myText.setText("Button Clicked!");
-    }
-});</pre>
+myBtn.setOnClickListener(v -> myText.setText("Clicked!"));</pre>
     </section>
 
     <section id="selection" class="card">
         <h2>RadioButtons & Group</h2>
-        <p>Used for "Select One" scenarios. Wrap buttons in a <code>RadioGroup</code>.</p>
         <span class="label">JAVA</span>
         <pre>
 RadioGroup group = findViewById(R.id.radioGroup);
-group.setOnCheckedChangeListener((rg, checkedId) -> {
-    RadioButton rb = findViewById(checkedId);
-    Log.d("Selection", "User picked: " + rb.getText());
+group.setOnCheckedChangeListener((rg, id) -> {
+    RadioButton rb = findViewById(id);
+    String val = rb.getText().toString();
 });</pre>
     </section>
 
     <section id="seekbar" class="card">
         <h2>SeekBar</h2>
-        <p>Allows range selection (e.g., volume or brightness).</p>
         <span class="label">JAVA</span>
         <pre>
 SeekBar sb = findViewById(R.id.seekBar);
 sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
     @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        // 'progress' holds the current value
+    public void onProgressChanged(SeekBar s, int p, boolean b) {
+        // p = current value
     }
     @Override public void onStartTrackingTouch(SeekBar s) {}
     @Override public void onStopTrackingTouch(SeekBar s) {}
@@ -174,72 +197,30 @@ sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
     <section id="listview" class="card">
         <h2>ListView & Adapter</h2>
-        <p>Displays a scrollable list. The <b>Adapter</b> acts as the bridge between your data and the UI.</p>
         <span class="label">JAVA</span>
         <pre>
-ListView listView = findViewById(R.id.listView);
-String[] data = {"Android", "iOS", "Windows", "Linux"};
+ListView lv = findViewById(R.id.listView);
+String[] names = {"Alice", "Bob", "Charlie"};
 
 ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;&gt;(this, 
-    android.R.layout.simple_list_item_1, data);
+    android.R.layout.simple_list_item_1, names);
 
-listView.setAdapter(adapter);</pre>
-    </section>
-
-    <section id="webview" class="card">
-        <h2>WebView</h2>
-        <p>Embeds a browser window. <i>Requires Internet Permission in Manifest.</i></p>
-        <span class="label">JAVA</span>
-        <pre>
-WebView web = findViewById(R.id.webView);
-web.setWebViewClient(new WebViewClient()); // Stay inside app
-web.getSettings().setJavaScriptEnabled(true);
-web.loadUrl("https://www.google.com");</pre>
-    </section>
-
-    <section id="calendar" class="card">
-        <h2>CalendarView</h2>
-        <p>A simple widget for date selection.</p>
-        <span class="label">JAVA</span>
-        <pre>
-CalendarView cv = findViewById(R.id.calendarView);
-cv.setOnDateChangeListener((view, year, month, day) -> {
-    String date = day + "/" + (month + 1) + "/" + year;
-    Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
-});</pre>
-    </section>
-
-    <section class="card">
-        <h2>Quick Reference Table</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Component</th>
-                    <th>Input Method</th>
-                    <th>Common Usage</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Button</td>
-                    <td>setOnClickListener</td>
-                    <td>Triggers an action</td>
-                </tr>
-                <tr>
-                    <td>ListView</td>
-                    <td>setAdapter</td>
-                    <td>Displaying arrays/lists</td>
-                </tr>
-                <tr>
-                    <td>RadioGroup</td>
-                    <td>setOnCheckedChangeListener</td>
-                    <td>Single-choice selection</td>
-                </tr>
-            </tbody>
-        </table>
+lv.setAdapter(adapter);</pre>
     </section>
 
 </main>
+
+<script>
+    function filterMenu() {
+        let input = document.getElementById('searchBar').value.toLowerCase();
+        let items = document.getElementById('menuList').getElementsByTagName('li');
+        
+        for (let i = 0; i < items.length; i++) {
+            let text = items[i].innerText.toLowerCase();
+            items[i].style.display = text.includes(input) ? "" : "none";
+        }
+    }
+</script>
 
 </body>
 </html>
