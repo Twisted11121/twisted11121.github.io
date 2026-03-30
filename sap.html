@@ -3,100 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Android Java UI & Logic Documentation</title>
+    <title>Android Java Master Reference</title>
     <style>
         :root {
-            --android-green: #3DDC84; 
+            --android: #3DDC84; 
             --navy: #073042;
-            --bg-gray: #f4f7f9;
-            --code-block: #2b2b2b;
-            --text-main: #202124;
-            --accent-blue: #1a73e8;
+            --bg: #f0f2f5;
+            --code-bg: #282c34;
+            --text: #333;
         }
 
         body {
-            font-family: 'Roboto', 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             display: flex;
-            background: var(--bg-gray);
-            color: var(--text-main);
+            background: var(--bg);
+            color: var(--text);
         }
 
-        /* Sidebar Styling */
+        /* Sidebar */
         nav {
-            width: 300px;
+            width: 280px;
             height: 100vh;
             background: var(--navy);
             color: white;
             position: fixed;
-            padding: 25px;
+            padding: 20px;
             box-sizing: border-box;
             overflow-y: auto;
-            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
         }
 
-        nav h2 { color: var(--android-green); margin-bottom: 25px; font-size: 1.4rem; }
+        nav h2 { color: var(--android); font-size: 1.2rem; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
 
-        #searchBar {
+        #search {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 25px;
-            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
             border: none;
-            background: rgba(255,255,255,0.1);
-            color: white;
+            outline: none;
         }
 
         nav ul { list-style: none; padding: 0; }
-        nav ul li { margin: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; }
-        nav ul li a { color: #bdc1c6; text-decoration: none; transition: 0.2s; font-size: 0.95rem; }
-        nav ul li a:hover { color: var(--android-green); }
+        nav ul li { margin: 10px 0; }
+        nav ul li a {
+            color: #bdc1c6;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            display: block;
+        }
+        nav ul li a:hover { color: var(--android); transform: translateX(5px); }
 
-        /* Content Area */
+        /* Main Content */
         main {
-            margin-left: 300px;
-            padding: 50px;
+            margin-left: 280px;
+            padding: 40px;
             width: 100%;
             max-width: 1000px;
         }
 
-        .section-card {
+        header { margin-bottom: 40px; }
+        header h1 { font-size: 2.5rem; color: var(--navy); margin: 0; }
+        header p { color: #666; font-size: 1.1rem; }
+
+        .card {
             background: white;
-            padding: 35px;
-            margin-bottom: 40px;
-            border-radius: 15px;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--android);
         }
 
-        h1 { font-size: 2.5rem; color: var(--navy); margin-top: 0; }
-        h2 { color: var(--navy); border-left: 5px solid var(--android-green); padding-left: 15px; margin-bottom: 20px; }
+        .card h2 { margin-top: 0; color: var(--navy); }
 
+        /* Code Blocks */
         pre {
-            background: var(--code-block);
-            color: #f8f8f2;
-            padding: 20px;
-            border-radius: 10px;
+            background: var(--code-bg);
+            color: #abb2bf;
+            padding: 18px;
+            border-radius: 8px;
             overflow-x: auto;
-            font-family: 'Source Code Pro', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
         }
 
-        .tag {
+        .badge {
             display: inline-block;
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
             font-weight: bold;
-            margin-bottom: 10px;
             text-transform: uppercase;
+            margin-bottom: 10px;
+            margin-right: 5px;
         }
-        .tag-java { background: #e8f0fe; color: #1967d2; }
-        .tag-manifest { background: #fef7e0; color: #c5221f; }
+        .java { background: #e3f2fd; color: #1565c0; }
+        .xml { background: #fff3e0; color: #e65100; }
 
-        @media (max-width: 900px) {
-            nav { width: 100%; height: auto; position: relative; }
+        @media (max-width: 850px) {
             body { flex-direction: column; }
+            nav { width: 100%; height: auto; position: relative; }
             main { margin-left: 0; padding: 20px; }
         }
     </style>
@@ -104,102 +114,168 @@
 <body>
 
 <nav>
-    <h2>Android Dev Guide</h2>
-    <input type="text" id="searchBar" placeholder="Search topics..." onkeyup="search()">
+    <h2>Android Java Guide</h2>
+    <input type="text" id="search" placeholder="Search components..." onkeyup="filterContent()">
     <ul id="menu">
-        <li><a href="#sharedprefs">SharedPreferences</a></li>
-        <li><a href="#broadcast">BroadcastReceiver</a></li>
+        <li><a href="#basics">TextView & Button</a></li>
+        <li><a href="#selection">RadioButtons & Group</a></li>
+        <li><a href="#seekbar">SeekBar</a></li>
         <li><a href="#calendar">CalendarView to String</a></li>
-        <li><a href="#menuinflator">Menu Inflator</a></li>
         <li><a href="#listview">ListView & Adapter</a></li>
         <li><a href="#webview">WebView</a></li>
+        <li><a href="#menuinflator">Menu Inflator</a></li>
+        <li><a href="#sharedprefs">SharedPreferences</a></li>
+        <li><a href="#broadcast">BroadcastReceiver</a></li>
     </ul>
 </nav>
 
 <main>
-    <h1>Reference Documentation</h1>
+    <header>
+        <h1>Java Reference Guide</h1>
+        <p>Essential snippets for Android Studio development.</p>
+    </header>
 
-    <section id="sharedprefs" class="section-card">
-        <h2>SharedPreferences</h2>
-        <p>Use this to save small amounts of primitive data (like settings or scores) that persist even after the app is closed.</p>
-        
-        <span class="tag tag-java">Writing Data</span>
+    <section id="basics" class="card">
+        <h2>TextView & Button</h2>
+        <span class="badge xml">XML</span>
+        <pre>&lt;Button android:id="@+id/btn" android:text="Click" /&gt;</pre>
+        <span class="badge java">Java</span>
         <pre>
-SharedPreferences pref = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-SharedPreferences.Editor editor = pref.edit();
+TextView txt = findViewById(R.id.textView);
+Button btn = findViewById(R.id.btn);
 
-editor.putString("username", "JohnDoe");
-editor.putInt("user_level", 5);
-editor.apply(); // Saves asynchronously</pre>
-
-        <span class="tag tag-java">Reading Data</span>
-        <pre>
-SharedPreferences pref = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-String name = pref.getString("username", "Guest"); // "Guest" is the default value
-int level = pref.getInt("user_level", 0);</pre>
-    </section>
-
-    <section id="broadcast" class="section-card">
-        <h2>BroadcastReceiver</h2>
-        <p>Enables the app to receive intents broadcast by the system or other apps (e.g., "Battery Low").</p>
-        
-        <span class="tag tag-java">Java Class</span>
-        <pre>
-public class MyReceiver extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        if (Intent.ACTION_AIRPLANE_MODE_CHANGED.equals(intent.getAction())) {
-            Toast.makeText(context, "Airplane Mode Changed", Toast.LENGTH_SHORT).show();
-        }
-    }
-}</pre>
-
-        <span class="tag tag-manifest">AndroidManifest.xml</span>
-        <pre>
-&lt;receiver android:name=".MyReceiver" android:exported="true"&gt;
-    &lt;intent-filter&gt;
-        &lt;action android:name="android.intent.action.AIRPLANE_MODE" /&gt;
-    &lt;/intent-filter&gt;
-&lt;/receiver&gt;</pre>
-    </section>
-
-    <section id="calendar" class="section-card">
-        <h2>CalendarView to String</h2>
-        <p>Convert the selected date into a formatted string for display.</p>
-        <span class="tag tag-java">Java Implementation</span>
-        <pre>
-calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
-    // Month is 0-indexed: January = 0, February = 1
-    String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-    textView.setText(selectedDate);
+btn.setOnClickListener(v -> {
+    txt.setText("Button was clicked!");
 });</pre>
     </section>
 
-    <section id="listview" class="section-card">
-        <h2>ListView & Adapter</h2>
-        <p>The standard way to display scrollable data rows.</p>
-        <span class="tag tag-java">Java Implementation</span>
+    <section id="selection" class="card">
+        <h2>RadioGroup & Buttons</h2>
+        <span class="badge java">Java</span>
         <pre>
-ListView lv = findViewById(R.id.myList);
-String[] items = {"Item 1", "Item 2", "Item 3"};
+RadioGroup group = findViewById(R.id.radioGroup);
+group.setOnCheckedChangeListener((rg, checkedId) -> {
+    RadioButton selected = findViewById(checkedId);
+    String text = selected.getText().toString();
+});</pre>
+    </section>
+
+    <section id="seekbar" class="card">
+        <h2>SeekBar</h2>
+        <span class="badge java">Java</span>
+        <pre>
+SeekBar sb = findViewById(R.id.seekBar);
+sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+    @Override
+    public void onProgressChanged(SeekBar s, int progress, boolean fromUser) {
+        // progress is current value
+    }
+    @Override public void onStartTrackingTouch(SeekBar s) {}
+    @Override public void onStopTrackingTouch(SeekBar s) {}
+});</pre>
+    </section>
+
+    <section id="calendar" class="card">
+        <h2>CalendarView to String</h2>
+        <span class="badge java">Java</span>
+        <pre>
+CalendarView cv = findViewById(R.id.calendarView);
+cv.setOnDateChangeListener((view, year, month, day) -> {
+    // Correcting month (0-11) to (1-12)
+    String date = day + "/" + (month + 1) + "/" + year;
+    Toast.makeText(this, "Selected: " + date, Toast.LENGTH_SHORT).show();
+});</pre>
+    </section>
+
+    <section id="listview" class="card">
+        <h2>ListView & Adapter</h2>
+        <span class="badge java">Java</span>
+        <pre>
+ListView lv = findViewById(R.id.listView);
+String[] data = {"Apple", "Banana", "Cherry"};
 
 ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;&gt;(this, 
-    android.R.layout.simple_list_item_1, items);
+    android.R.layout.simple_list_item_1, data);
 
 lv.setAdapter(adapter);</pre>
+    </section>
+
+    <section id="webview" class="card">
+        <h2>WebView</h2>
+        <span class="badge xml">Manifest</span>
+        <pre>&lt;uses-permission android:name="android.permission.INTERNET" /&gt;</pre>
+        <span class="badge java">Java</span>
+        <pre>
+WebView web = findViewById(R.id.webView);
+web.setWebViewClient(new WebViewClient()); // Open links in app
+web.getSettings().setJavaScriptEnabled(true);
+web.loadUrl("https://www.google.com");</pre>
+    </section>
+
+    <section id="menuinflator" class="card">
+        <h2>Menu Inflator</h2>
+        <span class="badge java">Java</span>
+        <pre>
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.my_menu, menu);
+    return true;
+}
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    int id = item.getItemId();
+    if (id == R.id.action_settings) return true;
+    return super.onOptionsItemSelected(item);
+}</pre>
+    </section>
+
+    <section id="sharedprefs" class="card">
+        <h2>SharedPreferences (Local Storage)</h2>
+        <span class="badge java">Java</span>
+        <pre>
+// Saving Data
+SharedPreferences sp = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+sp.edit().putString("name", "Alex").apply();
+
+// Loading Data
+String name = sp.getString("name", "Default Name");</pre>
+    </section>
+
+    <section id="broadcast" class="card">
+        <h2>BroadcastReceiver (System Events)</h2>
+        <span class="badge java">Java</span>
+        <pre>
+BroadcastReceiver br = new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        if (Intent.ACTION_BATTERY_LOW.equals(intent.getAction())) {
+            // Do something
+        }
+    }
+};
+// Dynamic Registration
+IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_LOW);
+registerReceiver(br, filter);</pre>
     </section>
 
 </main>
 
 <script>
-    function search() {
-        let input = document.getElementById('searchBar').value.toLowerCase();
+    function filterContent() {
+        let input = document.getElementById('search').value.toLowerCase();
         let menuItems = document.getElementById('menu').getElementsByTagName('li');
-        let sections = document.getElementsByClassName('section-card');
+        let cards = document.getElementsByClassName('card');
 
         for (let i = 0; i < menuItems.length; i++) {
-            let text = menuItems[i].innerText.toLowerCase();
-            menuItems[i].style.display = text.includes(input) ? "" : "none";
+            let txt = menuItems[i].innerText.toLowerCase();
+            if (txt.includes(input)) {
+                menuItems[i].style.display = "";
+                cards[i].style.display = "";
+            } else {
+                menuItems[i].style.display = "none";
+                cards[i].style.display = "none";
+            }
         }
     }
 </script>
