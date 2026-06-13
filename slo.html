@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arhiv Slovenske in Svetovne Književnosti</title>
+    <style>
+        /* --- CSS Spremenljivke in Reset --- */
+        :root {
+            --bg-body: #fdfbf7; /* Topel barvni ton papirja */
+            --bg-card: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --accent-color: #8e44ad;
+            --border-color: #e0e0e0;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            
+            /* Barve za obdobja */
+            --tag-romantika: #e74c3c;
+            --tag-realizem: #3498db;
+            --tag-moderne: #9b59b6;
+            --tag-antika: #f1c40f;
+            --tag-srednji-vek: #95a5a6;
+            --tag-ekspresionizem: #e67e22;
+            --tag-socialni: #27ae60;
+            --tag-avantgarda: #1abc9c;
+            --tag-sodobnost: #34495e;
+            --tag-absurd: #d35400;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Tipografija --- */
+        h1, h2, h3, h4 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #1a1a1a;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        h1 { font-size: 2.5rem; letter-spacing: -1px; }
+        h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        
+        /* --- Layout --- */
+        header {
+            background: #fff;
+            padding: var(--spacing-lg) 0;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+        }
+
+        /* --- Kartica (Card) --- */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: var(--spacing-lg);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: #222;
+            line-height: 1.3;
+        }
+
+        .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            align-items: center;
+            font-size: 0.9rem;
+            margin-top: var(--spacing-sm);
+        }
+
+        .author {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        /* Barvni razredi za oznake obdobij */
+        .tag-romantika { background-color: var(--tag-romantika); }
+        .tag-realizem { background-color: var(--tag-realizem); }
+        .tag-moderne { background-color: var(--tag-moderne); }
+        .tag-antika { background-color: var(--tag-antika); color: #333; }
+        .tag-srednji-vek { background-color: var(--tag-srednji-vek); }
+        .tag-ekspresionizem { background-color: var(--tag-ekspresionizem); }
+        .tag-socialni { background-color: var(--tag-socialni); }
+        .tag-avantgarda { background-color: var(--tag-avantgarda); }
+        .tag-sodobnost { background-color: var(--tag-sodobnost); }
+        .tag-absurd { background-color: var(--tag-absurd); }
+        .tag-renesanca { background-color: #c0392b; }
+        .tag-orient { background-color: #16a085; }
+        .tag-prehod { background-color: #7f8c8d; }
+
+        .card-summary {
+            flex-grow: 1;
+            margin-bottom: var(--spacing-md);
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        /* --- Details/Accordion --- */
+        details {
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+
+        summary {
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--accent-color);
+            outline: none;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        summary:hover {
+            background-color: #ececec;
+        }
+
+        .details-content {
+            padding: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .details-content h4 {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .details-content h4:first-child {
+            margin-top: 0;
+        }
+
+        .details-content p {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: var(--spacing-lg);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: var(--spacing-lg);
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .grid { grid-template-columns: 1fr; }
+            .card-meta { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Književni Arhiv</h1>
+            <p style="color: var(--text-muted);">Pregled pomembnih besedil, avtorjev in literarnih obdobij</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="grid">
+
+            <!-- Visoška kronika -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Visoška kronika</h2>
+                    <div class="card-meta">
+                        <span class="author">Ivan Tavčar</span>
+                        <span class="tag tag-realizem">Realizem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Zgodba se odvija v 17. stoletju na gradu Visoko. Osrednji lik Izidor Kalan odkrije temno skrivnost očetovega prihoda na posestvo (zločin). Agata je obtožena čarovništva, a jo Jurij reši.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Ivan Tavčar (1851–1923) je bil slovenski pisatelj in politik, ki se je loteval tematike kmečkega življenja. Najbolj znana dela: Visoška kronika, Cvetje v jeseni.</p>
+                        <h4>O obdobju (Realizem)</h4>
+                        <p>Literarno obdobje, ki se osredotoča na prikaz resničnega življenja in družbenih problemov. Zagovarja resnico in objektiven prikaz sveta, pogosto z zgodovinskim ozadjem. Glavni predstavniki: Tavčar, Jurčič, Kersnik.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika<br>Vrsta: Zgodovinski roman<br>Pripoved: Prvoosebna (Izidor Kalan)</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Jevgenij Onjegin -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Jevgenij Onjegin</h2>
+                    <div class="card-meta">
+                        <span class="author">Aleksander S. Puškin</span>
+                        <span class="tag tag-romantika">Romantika</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Mladeni plemič Onjegin je nezadovoljen z življenjem. Zavrne ljubezen Tatjane, v dvoboju pa ubije prijatelja Lenskega. Po letih se sreča z poročeno Tatjano in jo sam zagleda, a je prepozno.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Aleksander Sergejevič Puškin (1799–1837) velja za utemeljitelja moderne ruske književnosti. Pisal je poezijo, romane in drame. Umrl v dvoboju.</p>
+                        <h4>O obdobju (Romantika)</h4>
+                        <p>Obdobje, ki poudarja čustva, domišljijo in notranji svet posameznika. Namesto razuma izpostavlja svobodo, individualnost in osebna doživetja.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika<br>Vrsta: Roman v verzih (Onjeginova kitica)<br>Pripoved: Pripovedovalec komentira dogodke in izraža mnenja.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Deseti brat -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Deseti brat</h2>
+                    <div class="card-meta">
+                        <span class="author">Josip Jurčič</span>
+                        <span class="tag tag-realizem">Realizem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Izobčenec Jurij Krjavelj zaupa sina kmetu Smrekarju, ki ga vzgaja kot "desetega brata". Zgodba seplete med boji proti Turkom, osebno dramo in predsodki, ki se končajo tragično.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Josip Jurčič (1844–1881) velja za prvega slovenskega poklicnega pisatelja. Napisal je prvi slovenski roman v sodobnem smislu. Dela: Sosedov sin, Dedinja.</p>
+                        <h4>O obdobju (Realizem)</h4>
+                        <p>Od spretnih romantičnih pretiravanj k verodostojnemu prikazovanju življenja, zlasti kmečkega stanu. Poudarek na kritiki družbene nepravičnosti.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika<br>Vrsta: Zgodovinski roman (tretjeosebna pripoved).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Kostanj posebne vrste -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Kostanj posebne vrste</h2>
+                    <div class="card-meta">
+                        <span class="author">Ivan Cankar</span>
+                        <span class="tag tag-moderne">Moderne</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Osrednji motiv je poseben kostanj, ki simbolizira posebnost in upanje. Poudarek je na notranjem doživljanju, kjer kostanj predstavlja vztrajnost in obnovo življenja iz smrti.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Ivan Cankar (1876–1918) je največji slovenski realist in modernist. V delih ostro kritizira družbene razmere. Dela: Hlapci, Na klancu.</p>
+                        <h4>O obdobju (Moderne)</h4>
+                        <p>Prelom tisočletja in 1. svetovne vojne. Občutje strahu, negotovosti in izgube vrednot. Upor meščanski morali in poudarek na psihologiji.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Proza<br>Vrsta: Črtica (kratka pripoved, poudarek na občutjih).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Kralj Ojdip -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Kralj Ojdip</h2>
+                    <div class="card-meta">
+                        <span class="author">Sofokles</span>
+                        <span class="tag tag-antika">Antična grška</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    V Tebah razsaja kuga. Ojdip obljubi, da bo našel morilca kralja Laja. Med preiskovanjem odkrije, da je nevede ubil očeta in se poročil z materjo Jokasto.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Sofokles (496–406 pr. n. št.) velja za najbolj popolnega antičnega dramatika. Uvedel je tretjega igralca in poglobil psihološko karakterizacijo.</p>
+                        <h4>O obdobju (Antika)</h4>
+                        <p>"Zlata doba" atenške demokracije. Razvoj drame (tragedija, komedija), gledališče kot del javnega in verskega življenja.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Dramatika<br>Vrsta: Tragedija (mitološka snov, tragičen konec, katarza).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Krst pri Savici -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Krst pri Savici</h2>
+                    <div class="card-meta">
+                        <span class="author">France Prešeren</span>
+                        <span class="tag tag-romantika">Romantika</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Prikaz upora poganskih Slovanov leta 772. Premaganega Črtomirja odvedejo na krst, kjer sreča svojo ljubezen Bogomilo, ki je postala nun. Zbor med krstom in smrtjo izbere krst zaradi naroda.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>France Prešeren je najpomembnejši slovenski pesnik. Tematizira ljubezen, svobodo in narod. Povzdignil je slovenski jezik na umetniško raven.</p>
+                        <h4>O obdobju (Romantika)</h4>
+                        <p>Poudarja čustva, domoljubje, svobodo in narodno preteklost. Tragični junaki in razklanost osebnosti.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika (z lirskimi prvinami)<br>Vrsta: Epska pesnitev (Posvetilo, Uvod, Krst).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Lepa Vida -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Lepa Vida</h2>
+                    <div class="card-meta">
+                        <span class="author">Anonimna ljudska pesem</span>
+                        <span class="tag tag-srednji-vek">Srednji vek</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Lepa Vida sprejme ponudbo tujca in odide v Španijo kot dojilja, ker ji obljubi bogastvo. Na barki obsesivno kesa svojo odločitev, ko izve, da njen sin doma umira.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Avtor je anonimen (ljudsko slovstvo). Motiviko je obdelal tudi France Prešeren v pesmi Od lepe Vide.</p>
+                        <h4>O obdobju (Srednji vek)</h4>
+                        <p>Prevladuje versko in ljudsko slovstvo. Ljudsko slovstvo se širi ustno, avtorji so anonimni.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epsko-lirska pesem<br>Vrsta: Ženska balada (tragičen konec, osredotočena na žensko usodo).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Matkova Tina -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Matkova Tina</h2>
+                    <div class="card-meta">
+                        <span class="author">Ivan Pregelj</span>
+                        <span class="tag tag-ekspresionizem">Ekspresionizem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Zgodba prikazuje usodo Tine, ki živi v izredno težkih razmerah in trpljenju. Osredotoča se na njeno notranjo stisko, kar vodi v tragičen konec, ki poudarja brezizhodnost.</p>
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Ivan Pregelj (1883–1960) združuje religiozno čutenje in moralna vprašanja z ekspresionističnim slogom.</p>
+                        <h4>O obdobju (Ekspresionizem)</h4>
+                        <p>Čas po 1. svetovni vojni. Poudarek na notranjem doživljanju, strahu in bolečini; realnost je pogosto popačena.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika<br>Vrsta: Ekspresionistična novela.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Prilika o izgubljenem sinu -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Prilika o izgubljenem sinu</h2>
+                    <div class="card-meta">
+                        <span class="author">Evangelist Luka</span>
+                        <span class="tag tag-orient">Antika (Orient)</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Mlajši sin zapusti dom in zapravi dediščino. Ko se v stiski vrne, mu oče kljubjezi in ga sprejme z odpuščanjem, starejši sin pa ob tem občuti jezo.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Evangelist Luka, živel v 1. stoletju, zdravnik in spremljevalec apostola Pavla.</p>
+                        <h4>O obdobju (Orientalska književnost)</h4>
+                        <p>Verska in moralna besedila iz Biblije (Stara in Nova zaveza).</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika<br>Vrsta: Prilika (parabola) – poučna zgodba z moralnim naukom.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Hlapci -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Hlapci</h2>
+                    <div class="card-meta">
+                        <span class="author">Ivan Cankar</span>
+                        <span class="tag tag-moderne">Slovenska moderna</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Po zmagi klerikalcev se učitelji prilagodijo novi oblasti. Jerman se upre in zagovarja resnico ter svobodo mišljenja, a na koncu izgubi, saj sistem premaga posameznika.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Ivan Cankar (1876–1918), ključna osebnost slovenske moderne, kritik družbe in oblasti.</p>
+                        <h4>O obdobju (Slovenska moderna)</h4>
+                        <p>Poudarek na posamezniku, notranjem doživljanju in kritiki družbenih razmer.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Dramatika<br>Vrsta: Družbenokritična drama (s satiro, ironijo, grotesko).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Samorastniki -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Samorastniki</h2>
+                    <div class="card-meta">
+                        <span class="author">Prežihov Voranc</span>
+                        <span class="tag tag-socialni">Socialni realizem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Prikaže težko življenje revnih in družbo, ki obsoja šibkejše. Poudarja močno človeško voljo za preživetje v okviru socialnih razlik.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Prežihov Voranc (1893–1950), pisatelj, ki je v delih opisoval življenje delavcev in kmetov.</p>
+                        <h4>O obdobju (Socialni realizem)</h4>
+                        <p>Realistični prikaz družbenih razmer, zanimanje za revne sloje in kritika oblasti.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika<br>Vrsta: Novela oziroma daljša pripoved.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Romeo in Julija -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Romeo in Julija</h2>
+                    <div class="card-meta">
+                        <span class="author">William Shakespeare</span>
+                        <span class="tag tag-renesanca">Renesansa</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                Kljub sovražnosti med družinama Montegue in Capulette se njuni otroka zaljubita. Po nizu tragičnih dogodkov in dvojnem samomoru se družini spravita.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>William Shakespeare (1564–1616) velja za najpomembnejšega predstavnika angleške in svetovne književnosti.</p>
+                        <h4>O obdobju (Renesansa)</h4>
+                        <p>Razcvet umetnosti in znanosti, humanizem in postavljanje človeka v središče pozornosti.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Dramatika<br>Vrsta: Tragedija.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Saloma -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Saloma</h2>
+                    <div class="card-meta">
+                        <span class="author">Oscar Wilde</span>
+                        <span class="tag tag-moderne">Evropska Moderna</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Princesa Saloma je obsedena z prerokom Johanaanom. V zameno za ples zahteva njegovo glavo. Ko jo dobi in poljubi, jo zgroženi Herod ukže usmrtiti.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Oscar Wilde (1854–1900), irski pisatelj, predstavnik esteticizma in dekadence.</p>
+                        <h4>O obdobju (Evropska Moderna)</h4>
+                        <p>Oddaljevanje od tradicionalnih vrednot, poudarek na čutnosti, lepoti in simbolih.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Dramatika<br>Vrsta: Poetična drama.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Režonja na svojem -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Režonja na svojem</h2>
+                    <div class="card-meta">
+                        <span class="author">Miško Kranjec</span>
+                        <span class="tag tag-socialni">Socialni realizem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Revni kmet Jožef Režonja ukrade denar bogatašu in si z agrarno reformo kupi zemljo. Vse življenje ga preganja vest, vendar se dejanja ne kesa.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Miško Kranjec (1908–1983), slovenski pisatelj, ki je prikazoval življenje prekmurskih kmetov.</p>
+                        <h4>O obdobju (Socialni realizem)</h4>
+                        <p>Objektivno prikazovanje družbenih razmer brez idealizacije, življenje "malega človeka".</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika<br>Vrsta: Socialni roman / Povest.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Dogodek v mestu Gogi -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Dogodek v mestu Gogi</h2>
+                    <div class="card-meta">
+                        <span class="author">Slavko Grum</span>
+                        <span class="tag tag-ekspresionizem">Ekspresionizem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Hana se vrne, da bi se soočila s Prelihom, ki jo je nekdaj posilil. V afektu ga misli ubiti, a Prelih preživi. Mesto ostane nespremenjeno, ujetniki svojih patologij.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Dr. Slavko Grum (1901–1949), zdravnik in pisatelj, znan po groteski.</p>
+                        <h4>O obdobju (Ekspresionizem)</h4>
+                        <p>Subjektivno doživljanje, tesnoba, "notranji krik", deformirana resničnost.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Groteskna drama<br>Tehnika: Simultano gledališče.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Kons. 5 -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Kons. 5</h2>
+                    <div class="card-meta">
+                        <span class="author">Srečko Kosovel</span>
+                        <span class="tag tag-avantgarda">Avantgarda</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Pesem govori o svetu brez pravih vrednot, kjer je zlavo izenačeno z gnojem. Kosovel uporablja matematične simbole za kritiko pohlepa in duhovne praznine.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Srečko Kosovel (1904–1926), pesnik, ki je umrl mlad. Njegova pot vodila od impresionizma do konstruktivizma.</p>
+                        <h4>O obdobju (Avantgarda)</h4>
+                        <p>Razstavljanje starih vrednot, uporaba nekonvencionalnih zapisov, svoboden verz.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Lirika<br>Vrsta: Konstruktivistična pesem.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Tilka -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Tilka</h2>
+                    <div class="card-meta">
+                        <span class="author">Simon Jenko</span>
+                        <span class="tag tag-prehod">Prehod (Romantika/Realizem)</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Prizadet mladenič Tilka je poslan na snubitev, a je zaradi svojega videza osramočen. Vrne se domov z občutkom olajšanja, da se ni oženil. Prva slovenska psihološka novela.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                        <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Simon Jenko (1835–1869), pesnik in pisatelj, utemeljitelj slovenske proze.</p>
+                        <h4>O obdobju</h4>
+                        <p>Ohranjanje romantičnega zanimanja za posebneže, a uvajanje realističnih prvin (vaško okolje, psihologija).</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Proza<br>Vrsta: Karakterna novela (značajevka).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Zločin in kazen -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Zločin in kazen</h2>
+                    <div class="card-meta">
+                        <span class="author">Fjodor M. Dostojevski</span>
+                        <span class="tag tag-realizem">Realizem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Študent Raskolnikov ubije oderuhinjo, prepričan, da je "nadčlovek". Krivda in paranoja ga pripeljejo do priznanja in odrešenja v Sibiriji ob strani Sonje.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Fjodor Mihajlovič Dostojevski (1821–1881), ruski pisatelj, mojster psihološkega realističnega romana.</p>
+                        <h4>O obdobju (Realizem)</h4>
+                        <p>Verodostojno prikazovanje resničnosti, kritika družbenih razter, globoka psihološka analiza likov.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika<br>Vrsta: Psihološki realistični roman.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Z vlakom -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Z vlakom</h2>
+                    <div class="card-meta">
+                        <span class="author">Oton Župančič</span>
+                        <span class="tag tag-moderne">Slovenska moderna</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Pesnik vozi z vlakom v tujino. Žalost ob odhodu preide v globoko ljubezen do domovine, ki ji obljublja zvestobo, ko vlak zapušča meje domovine.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Oton Župančič (1878–1949), eden najpomembnejših pesnikov slovenske moderne, uvedel svobodni verz.</p>
+                        <h4>O obdobju (Slovenska moderna)</h4>
+                        <p>Subjektivnost, izražanje čustev, bogat jezik, simboli, osebno doživljanje sveta.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Lirika<br>Vrsta: Domoljubna lirika (hvalnica domovini).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Črni deček -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Črni deček</h2>
+                    <div class="card-meta">
+                        <span class="author">Dane Zajc</span>
+                        <span class="tag tag-sodobnost">Eksistencializem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Osamljen črni deček v puščavi roji ptice, ki jih uničijo zlobno sonce in ledene zvezde. Ciklično uničevanje in rojevanje simbolizira uporništvo v absurdnem svetu.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Dane Zajc (1930–2005), pesnik, glavni predstavnik absurda in eksistencializma v Sloveniji.</p>
+                        <h4>O obdobju (Eksistencializem)</h4>
+                        <p>Osredotočanje na človekovo bivanje v nesmiselnem svetu, teme osamljenosti in iskanja smisla.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Lirika<br>Vrsta: Modernistična pesem v svobodnem verzu.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Večerna pravljica -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Večerna pravljica</h2>
+                    <div class="card-meta">
+                        <span class="author">Gregor Strniša</span>
+                        <span class="tag tag-sodobnost">Sodobni simbolizem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Pesem prikazuje dva sveta: pravljični gozd, kjer se narava divja prebuja, in realno hišo, kjer ljudje pasivno spijo. Prikaz človekove nemoči pred skrivnostnimi silami.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Gregor Strniša (1930–1987), pesnik in dramatik, ki je raziskoval idejo vesoljske zavesti.</p>
+                        <h4>O obdobju</h4>
+                        <p>Sodobna poezija z uporabo simbolov in metafor za prikaz notranjih stanj in povezav z vesoljem.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Lirika<br>Vrsta: Pesem s pravljičnimi elementi.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Tantadruj -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Tantadruj</h2>
+                    <div class="card-meta">
+                        <span class="author">Ciril Kosmač</span>
+                        <span class="tag tag-sodobnost">Povojna proza</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Vaški norček Tantadruj želi umreti, ker naj bi bila sreča le po smrti. Norčki ga pokopljejo živega, a Tantadrujevo zahtevanje po zvonjenju prestraši vaščane in ga rešijo.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Ciril Kosmač (1910–1980), pisatelj, ki je pisal o "malem človeku" in vaških čudežih.</p>
+                        <h4>O obdobju</h4>
+                        <p>Povojna proza s povezavo socialnega realizma in modernizma (groteska, humor).</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika<br>Vrsta: Moderna novela (okvirna in vložena zgodba).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Plešasta pevka -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Plešasta pevka</h2>
+                    <div class="card-meta">
+                        <span class="author">Eugène Ionesco</span>
+                        <span class="tag tag-absurd">Gledališče absurda</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Zakonca Smith in Martin preživljajo čas v banalnih in nesmiselnih pogovorih, ki se končajo tam, kjer so se začeli. Kritika banalnosti in brezveznosti medosebnih odnosov.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Eugène Ionesco (1909–1994), francoski dramatik, glavni predstavnik gledališča absurda.</p>
+                        <h4>O obdobju (Gledališče absurda)</h4>
+                        <p>Zavračanje tradicionalnih pravil, razpad komunikacije, absurdnost človekovega obstoja.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Drama<br>Vrsta: Antidrama / Drama absurda.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Južni otok -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Južni otok</h2>
+                    <div class="card-meta">
+                        <span class="author">Kajetan Kovič</span>
+                        <span class="tag tag-moderne">Sodobna lirika</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Otok v daljavi se pojavi in izgine. Simbolizira iskanje smisla življenja. Lirski subjekt niha med upanjem in dvomom o obstoju te vrednote.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Kajetan Kovič (1931–2014), pesnik in pisatelj, poznan po zbirki Labrador in otroških delih.</p>
+                        <h4>O obdobju (Sodobna lirika)</h4>
+                        <p>Oddaljevanje od pravil, poudarek na notranjem svetu in eksistencialnih vprašanjih.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Lirika<br>Vrsta: Bivanjska (eksistencialna) lirika, simbolistična pesem.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Vladimir -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Vladimir</h2>
+                    <div class="card-meta">
+                        <span class="author">Matjaž Zupančič</span>
+                        <span class="tag tag-sodobnost">Postmodernizem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Trije študenti oddajo sobo Vladimirju, ki postane nadvse nadzoren in nasilen. Zgodba se spiralno stopnjuje do končnega fizičnega spopada.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Matjaž Zupančič (rojen 1959), dramatik in režiser, plodovit sodobni avtor.</p>
+                        <h4>O obdobju (Postmodernizem)</h4>
+                        <p>Preizkušanje meih zvrsti, aktualne družbene teme (nasilje, manipulacija), pogovoren jezik.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Drama<br>Vrsta: Sodobna drama, psihološka srhljivka.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Gobice IV -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Gobice IV</h2>
+                    <div class="card-meta">
+                        <span class="author">Tomaž Šalamun</span>
+                        <span class="tag tag-avantgarda">Neoavantgarda</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                Eksperimentalna pesem, ki postavi hipotetično vprašanje o svetu brez črke P. Ker črka P vzdržuje red, njena odsotnost pomeni propad, kar pesem prikaže z igrivim besednim komuniciranjem.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Tomaž Šalamun (1941–2014), eden najpomembnejših slovenskih pesnikov, soustanovitelj skupine OHO.</p>
+                        <h4>O obdobju (Moderinizem/Neoavantgarda)</h4>
+                        <p>Eksperimentiranje z jezikom, igrivost (ludizem), svoboden verz, odklon od socializma.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Lirika<br>Vrsta: Modernistična/avantgardna pesem.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Menuet za kitaro -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Menuet za kitaro</h2>
+                    <div class="card-meta">
+                        <span class="author">Vitomil Zupan</span>
+                        <span class="tag tag-sodobnost">Moderinizem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Roman prepleta zgodbo partizana Berka med 2. svetovno vojno in njegovo srečanje z bivšim sovražnikom na Španiji leta 1973. Iskanje smisla v absurdnih situacijah.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Vitomil Zupan (1914–1987), pisatelj s burnim življenjem, znan po modernističnem slogu.</p>
+                        <h4>O obdobju (Moderinizem)</h4>
+                        <p>Poudarek na notranjem svetu, modernistične tehnike (notranji monolog), vojne traume.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika (proza)<br>Vrsta: Moderni roman (vojni, avtobiografski, eksistenčni).</p>
+                    </div>
+                </details>
+            </article>           
+
+            <!-- Franz Kafka: Preobrazba -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Preobrazba</h2>
+                    <div class="card-meta">
+                        <span class="author">Franz Kafka</span>
+                        <span class="tag tag-ekspresionizem">Moderna / Ekspresionizem</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Gregor Samsa se zjutraj zbudi in odkrije, da se je preobrazil v strašnega nerečnega kužnega hrošča. Njegova družina ga zavrača, zaposlitev ga izkorišča, on pa postane breme, ki na koncu tiho umre.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Franz Kafka (1883–1924) je nemškojezikovni pisatelj iz Prage. Njegova dela raziskujejo teme birokracije, krivde, očetovske avtoritete in absurdne izolacije. Dela: Proces, Grad.</p>
+                        <h4>O obdobju (Moderna/Ekspresionizem)</h4>
+                        <p>Zgodnje 20. stoletje. Poudarek na notranjem svetu, občutku tujosti (alienacije), izgubi identitete in absurdnosti življenja.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Epika<br>Vrsta: Moderna novela (groteskna pripoved z realističnim opisom okolja).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Dragotin Kette: Na trgu -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Na trgu</h2>
+                    <div class="card-meta">
+                        <span class="author">Dragotin Kette</span>
+                        <span class="tag tag-moderne">Slovenska moderna</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Pesnik v noči stoji na trgu pod oknom nedosegljive Angele. Njegove želje so kot vodne kaplje, ki se dvignejo proti nebu, a nato onemoglo padajo nazaj v kotanjo – prispodoba za nesrečno ljubezen.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Dragotin Kette (1876–1899) je eden ključnih predstavnikov slovenske moderne. Znan po čustvenem, melodičnem pesništvu, ki odraža razočaranje in hrepenenje. Umrl je mlad, star 23 let.</p>
+                        <h4>O obdobju (Slovenska moderna)</h4>
+                        <p>Konec 19. stoletja. Zavračanje starih vrednot, obračanje k notranjemu svetu, čustvom in subjektivnemu doživljanju (impresionizem). Glavne teme: razočaranje, smrt, narava.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Leposlovje (poezija)<br>Vrsta: Lirika (lirična pesem).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Drago Jančar: Veliki briljantni valček -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Veliki briljantni valček</h2>
+                    <div class="card-meta">
+                        <span class="author">Drago Jančar</span>
+                        <span class="tag tag-sodobnost">Sodobnost</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Drama se dogaja v psihiatrični ustanovi, kjer glavni lik Simon Veber spoznava, da institucija predstavlja zatiralski sistem. Naslov se navezuje na Chopinov valček kot simbol lepote in svobode v kontrastu s stvarnostjo.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>O avtorju</h4>
+                        <p>Drago Jančar (rojen 1948) je eden najpomembnejših sodobnih slovenskih pisateljev. Znan po kritičnem pogledu na totalitarne režime in politično zgodovino 20. stoletja.</p>
+                        <h4>O obdobju (Sodobnost)</h4>
+                        <p>Konec 20. stoletja (po 1991). Književnost se obrača k preteklosti in reevaluira totalitarne sisteme. Teme: svoboda, izobčenje, kriza identitete.</p>
+                        <h4>Zvrst in vrsta</h4>
+                        <p>Zvrst: Dramatika<br>Vrsta: Drama (igra).</p>
+                    </div>
+                </details>
+            </article>
+
+                        <!-- Koreni slovenskega jezika -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Izvor in najzgodnejši zapisi</h2>
+                    <div class="card-meta">
+                        <span class="author">Prajezik in Zgodovina</span>
+                        <span class="tag tag-srednji-vek">Prazgodovina do 1000</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    Iz indoevropskega jezika so se razvili indoevropski jeziki. Slovanski jeziki se delijo na vzhodne, zahodne in južne (kjer sodi tudi slovenščina). Najstarejši zapisi so Brižinski spomeniki (okoli leta 1000), ki vsebujejo verska besedila in dvojino.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>Zemljepisni razpon</h4>
+                        <p>Praslovanščina se je govorila od Baltskega do Črnega morja. Predniki Slovencev so se naselili med Donavo in Jadranom.</p>
+                        <h4>Delitev Slovanskih jezikov</h4>
+                        <p>Jeziki se delijo glede na izgovorjavo številke 100 na vzhodne (što) in zahodne (sto).</p>
+                        <ul>
+                            <li><strong>Vzhodni:</strong> ruščina, ukrajinščina</li>
+                            <li><strong>Zahodni:</strong> češčina, poljščina</li>
+                            <li><strong>Južni:</strong> slovenščina, srbščina, hrvaščina...</li>
+                        </ul>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Razvoj knjižnega jezika -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Oblikovanje knjižnega jezika</h2>
+                    <div class="card-meta">
+                        <span class="author">16. - 19. stoletje</span>
+                        <span class="tag tag-realizem">Novoveška zgodovina</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    V 16. stoletju izidejo prve tiskane knjige v slovenščini (Abecednik in Katekizem). V razsvetljenstvu postane slovenščina učni jezik. Romantika prinaša abecedno vojno (prevzem gajice), v realizmu pa se jezik uveljavi kot uradni v osnovnih šolah.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>Ključni obrati</h4>
+                        <p><strong>16. stoletje:</strong> Nastanek slovenskega knjižnega jezika.</p>
+                        <p><strong>Razsvetljenstvo:</strong> Slovenščina postane učni jezik, čeprav je jezik še vedno razepljen na narečja.</p>
+                        <p><strong>Romantika:</strong> "Abecedna vojna" – Slovenci na koncu prevzamejo gajico.</p>
+                        <p><strong>Realizem (2. pol. 19. st.):</strong> Slovenščina se uveljavi kot uradni jezik in učni jezik v osnovnih šolah.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Zamejci in Sodobnost -->
+            <article class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Sodobnost in Zamejci</h2>
+                    <div class="card-meta">
+                        <span class="author">20. - 21. stoletje</span>
+                        <span class="tag tag-sodobnost">Sodobnost</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    V prvi polovici 20. stoletja je bil jezik podrejen srbo-hrvaščini, zamejci pa so bili pod asimilacijo. Po osamosvojitvi je slovenščina državni jezik, leta 2004 pa uradni jezik EU. Pomembne so tudi razlike med zdomci, izseljenci in zamejci.
+                </div>
+                <details>
+                    <summary>Prikaži podrobnosti</summary>
+                    <div class="details-content">
+                        <h4>Status jezika</h4>
+                        <p><strong>1. polovica 20. stoletja:</strong> Slovenščina je podrejena srbo-hrvaščini. Zamejci so pod strogo asimilacijo.</p>
+                        <p><strong>Po osamosvojitvi:</strong> Slovenščina je državni in uradni jezik.</p>
+                        <p><strong>Leta 2004:</strong> Vstop v EU, slovenščina postane eden izmed uradnih jezikov Evropske unije.</p>
+                        <h4>Pojmovne določnice</h4>
+                        <ul>
+                            <li><strong>Zdomec:</strong> Tisti, ki je odšel v tujino zaradi dela in se namerava vrniti.</li>
+                            <li><strong>Izseljenec:</strong> Tisti, ki se je izselil iz države.</li>
+                            <li><strong>Zamejec:</strong> Slovenec, ki živi za državno mejo (Avstrija, Madžarska, Italija) in je zaradi spreminajočih se mej obtičal izven Slovenije.</li>
+                        </ul>
+                    </div>
+                </details>
+            </article>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Literarni Arhiv. Vsi podatki so vzeti iz priloženega gradiva.</p>
+    </footer>
+
+</body>
+</html>
