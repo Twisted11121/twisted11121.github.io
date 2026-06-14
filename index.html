@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project File Index</title>
+    <title>Project Directory Index</title>
     <style>
         :root {
             --primary-color: #2563eb;
@@ -11,12 +11,11 @@
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #1e293b;
-            --text-secondary: #64748b;
+            --text-muted: #64748b;
             --border-color: #e2e8f0;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --info-color: #3b82f6;
-            --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius: 12px;
         }
 
         * {
@@ -26,371 +25,401 @@
         }
 
         body {
-            font-family: var(--font-family);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1.5rem 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            padding: 2rem 1rem;
         }
 
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 0 1.5rem;
         }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+        /* Header Styling */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
         h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
         }
 
-        .folder-icon {
-            width: 32px;
-            height: 32px;
-            fill: var(--warning-color);
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
         }
 
-        .search-wrapper {
+        /* Search Styling */
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 3rem auto;
             position: relative;
         }
 
         .search-input {
-            padding: 0.6rem 1rem 0.6rem 2.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 0.9rem;
             width: 100%;
-            max-width: 300px;
-            transition: border-color 0.2s;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            background-color: var(--card-bg);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
         }
 
         .search-input:focus {
             outline: none;
             border-color: var(--primary-color);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 0.8rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 16px;
-            height: 16px;
-            fill: var(--text-secondary);
-        }
-
-        /* Main Content */
-        main {
-            flex: 1;
-            padding: 2.5rem 0;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
 
         /* Grid Layout */
-        .file-grid {
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
-        /* File Card */
-        .file-card {
+        /* Card Styling */
+        .card {
             background-color: var(--card-bg);
+            border-radius: var(--radius);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
             padding: 1.5rem;
-            transition: all 0.2s ease;
             text-decoration: none;
-            color: inherit;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .file-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-color: var(--primary-color);
-        }
-
-        .file-card.current-page {
-            background-color: #eff6ff;
-            border-color: var(--primary-color);
-        }
-
-        .file-card.current-page::before {
-            content: "Current Page";
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: var(--primary-color);
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.6rem;
-            border-bottom-left-radius: 8px;
-            font-weight: 600;
-        }
-
-        .card-top {
-            display: flex;
             align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            height: 100%;
         }
 
-        .html-icon {
-            width: 40px;
-            height: 40px;
-            flex-shrink: 0;
-            fill: #e44d26; /* HTML5 Orange */
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
         }
 
-        .file-info {
-            overflow: hidden;
-        }
-
-        .file-name {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--text-main);
-            margin-bottom: 0.25rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .file-desc {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .card-meta {
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            border-radius: 10px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-top: auto;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
 
-        .status-badge {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.6rem;
-            border-radius: 999px;
+        .card-title {
+            font-size: 1.1rem;
             font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
         }
 
-        .status-active {
-            background-color: #d1fae5;
-            color: #065f46;
+        .card-filename {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: #f1f5f9;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
         }
 
-        .status-updated {
-            background-color: #dbeafe;
-            color: #1e40af;
-        }
-
-        .status-default {
-            background-color: #f1f5f9;
-            color: #475569;
-        }
-
-        .arrow-icon {
-            width: 16px;
-            height: 16px;
-            fill: var(--text-secondary);
-            transition: fill 0.2s;
-        }
-
-        .file-card:hover .arrow-icon {
-            fill: var(--primary-color);
+        /* Empty State for Search */
+        .no-results {
+            display: none;
+            text-align: center;
+            color: var(--text-muted);
+            font-style: italic;
+            grid-column: 1 / -1;
+            padding: 2rem;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            margin-top: 4rem;
+            padding-top: 2rem;
             border-top: 1px solid var(--border-color);
-            background: var(--card-bg);
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
-
-        @media (max-width: 600px) {
-            .header-content {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .search-input {
-                max-width: 100%;
-            }
+        
+        /* Icons */
+        svg {
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container header-content">
-            <h1>
-                <svg class="folder-icon" viewBox="0 0 24 24">
-                    <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/>
-                </svg>
-                Project Directory
-            </h1>
-            <div class="search-wrapper">
-                <svg class="search-icon" viewBox="0 0 24 24">
-                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                </svg>
-                <input type="text" class="search-input" placeholder="Search files...">
-            </div>
-        </div>
-    </header>
+    <div class="container">
+        <header>
+            <h1>File Directory</h1>
+            <p class="subtitle">Central navigation for all project pages</p>
+        </header>
 
-    <main>
-        <div class="container">
-            <h2 class="section-title">Web Pages</h2>
+        <!-- Search Filter -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search for a page (e.g., 'support', 'quiz')..." aria-label="Search files">
+        </div>
+
+        <!-- Category: Company Information -->
+        <section class="category-section">
+            <h2 class="category-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4 8 4v14"/><path d="M17 21v-8.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5V21"/><path d="M9 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/></svg>
+                Company Information
+            </h2>
+            <div class="grid" id="company-grid">
+                <a href="company-about.html" class="card" data-name="about company">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                    </div>
+                    <div class="card-title">About Us</div>
+                    <div class="card-filename">company-about.html</div>
+                </a>
+                <a href="company-FAQ.html" class="card" data-name="faq questions help">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </div>
+                    <div class="card-title">FAQ</div>
+                    <div class="card-filename">company-FAQ.html</div>
+                </a>
+                <a href="company-support.html" class="card" data-name="support help contact">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div class="card-title">Support</div>
+                    <div class="card-filename">company-support.html</div>
+                </a>
+                <a href="employment-open-positions.html" class="card" data-name="jobs careers employment">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    </div>
+                    <div class="card-title">Open Positions</div>
+                    <div class="card-filename">employment-open-positions.html</div>
+                </a>
+                <a href="kontakt.html" class="card" data-name="kontakt contact">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <div class="card-title">Kontakt</div>
+                    <div class="card-filename">kontakt.html</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Category: Computer Catalog -->
+        <section class="category-section">
+            <h2 class="category-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m14 9 3 3-3 3"/></svg>
+                Computer Catalog
+            </h2>
+            <div class="grid" id="computers-grid">
+                <a href="računalniki.html" class="card" data-name="racunalniki computers overview">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+                    </div>
+                    <div class="card-title">Catalog Overview</div>
+                    <div class="card-filename">računalniki.html</div>
+                </a>
+                <a href="racunalnik1.html" class="card" data-name="racunalnik 1 computer">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                    </div>
+                    <div class="card-title">Computer Unit 1</div>
+                    <div class="card-filename">racunalnik1.html</div>
+                </a>
+                <a href="racunalnik2.html" class="card" data-name="racunalnik 2 computer">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                    </div>
+                    <div class="card-title">Computer Unit 2</div>
+                    <div class="card-filename">racunalnik2.html</div>
+                </a>
+                <a href="racunalnik3.html" class="card" data-name="racunalnik 3 computer">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                    </div>
+                    <div class="card-title">Computer Unit 3</div>
+                    <div class="card-filename">racunalnik3.html</div>
+                </a>
+                <a href="racunalnik4.html" class="card" data-name="racunalnik 4 computer">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                    </div>
+                    <div class="card-title">Computer Unit 4</div>
+                    <div class="card-filename">racunalnik4.html</div>
+                </a>
+                <a href="racunalnik5.html" class="card" data-name="racunalnik 5 computer">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                    </div>
+                    <div class="card-title">Computer Unit 5</div>
+                    <div class="card-filename">racunalnik5.html</div>
+                </a>
+                <a href="racunalnik6.html" class="card" data-name="racunalnik 6 computer">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                    </div>
+                    <div class="card-title">Computer Unit 6</div>
+                    <div class="card-filename">racunalnik6.html</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Category: Shop & Media -->
+        <section class="category-section">
+            <h2 class="category-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                Shop & Media
+            </h2>
+            <div class="grid" id="shop-grid">
+                <a href="merch.html" class="card" data-name="merchandise shop store">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    </div>
+                    <div class="card-title">Merchandise</div>
+                    <div class="card-filename">merch.html</div>
+                </a>
+                <a href="galerija-slik.html" class="card" data-name="gallery images photos">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                    <div class="card-title">Photo Gallery</div>
+                    <div class="card-filename">galerija-slik.html</div>
+                </a>
+                <a href="warrenty.html" class="card" data-name="warranty guarantee">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div class="card-title">Warranty Info</div>
+                    <div class="card-filename">warrenty.html</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Category: Miscellaneous -->
+        <section class="category-section">
+            <h2 class="category-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Miscellaneous
+            </h2>
+            <div class="grid" id="misc-grid">
+                <a href="sap.html" class="card" data-name="sap system">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <div class="card-title">SAP System</div>
+                    <div class="card-filename">sap.html</div>
+                </a>
+                <a href="quiz123.html" class="card" data-name="quiz game test">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <div class="card-title">Quiz 123</div>
+                    <div class="card-filename">quiz123.html</div>
+                </a>
+                <a href="slo.html" class="card" data-name="slovenian slo language">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <div class="card-title">Slovenian Version</div>
+                    <div class="card-filename">slo.html</div>
+                </a>
+            </div>
             
-            <div class="file-grid">
-
-                <!-- Index Page (Current) -->
-                <a href="index.html" class="file-card current-page" aria-current="page">
-                    <div class="card-top">
-                        <svg class="html-icon" viewBox="0 0 24 24">
-                            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
-                        </svg>
-                        <div class="file-info">
-                            <div class="file-name">index.html</div>
-                            <div class="file-desc">Main directory and navigation hub.</div>
-                        </div>
-                    </div>
-                    <div class="card-meta">
-                        <span class="status-badge status-default">Active</span>
-                        <svg class="arrow-icon" viewBox="0 0 24 24">
-                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                        </svg>
-                    </div>
-                </a>
-
-                <!-- Company FAQ -->
-                <a href="company - FAQ.html" class="file-card">
-                    <div class="card-top">
-                        <svg class="html-icon" viewBox="0 0 24 24">
-                            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
-                        </svg>
-                        <div class="file-info">
-                            <div class="file-name">company - FAQ.html</div>
-                            <div class="file-desc">Frequently asked questions section.</div>
-                        </div>
-                    </div>
-                    <div class="card-meta">
-                        <!-- Based on "yes" or "Active" from description -->
-                        <span class="status-badge status-active">Yes</span>
-                        <svg class="arrow-icon" viewBox="0 0 24 24">
-                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                        </svg>
-                    </div>
-                </a>
-
-                <!-- Kontakt (Contact) -->
-                <a href="kontakt.html" class="file-card">
-                    <div class="card-top">
-                        <svg class="html-icon" viewBox="0 0 24 24">
-                            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
-                        </svg>
-                        <div class="file-info">
-                            <div class="file-name">kontakt.html</div>
-                            <div class="file-desc">Contact page and address details.</div>
-                        </div>
-                    </div>
-                    <div class="card-meta">
-                        <span class="status-badge status-active">Active</span>
-                        <svg class="arrow-icon" viewBox="0 0 24 24">
-                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                        </svg>
-                    </div>
-                </a>
-
-                <!-- SAP Info -->
-                <a href="sap.html" class="file-card">
-                    <div class="card-top">
-                        <svg class="html-icon" viewBox="0 0 24 24">
-                            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
-                        </svg>
-                        <div class="file-info">
-                            <div class="file-name">sap.html</div>
-                            <div class="file-desc">SAP System integration page.</div>
-                        </div>
-                    </div>
-                    <div class="card-meta">
-                        <!-- Based on "Update sap.html" from description -->
-                        <span class="status-badge status-updated">Updated</span>
-                        <svg class="arrow-icon" viewBox="0 0 24 24">
-                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                        </svg>
-                    </div>
-                </a>
-
-                <!-- Additional placeholder for visual balance -->
-                <a href="#" class="file-card" style="opacity: 0.7; border-style: dashed;">
-                    <div class="card-top">
-                        <svg class="html-icon" style="fill: #cbd5e1" viewBox="0 0 24 24">
-                            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
-                        </svg>
-                        <div class="file-info">
-                            <div class="file-name">Add new page...</div>
-                            <div class="file-desc">Create a new HTML file.</div>
-                        </div>
-                    </div>
-                    <div class="card-meta">
-                        <span class="status-badge status-default">Template</span>
-                        <svg class="arrow-icon" viewBox="0 0 24 24">
-                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                        </svg>
-                    </div>
-                </a>
-
+            <div id="no-results" class="no-results">
+                No files found matching your search.
             </div>
-        </div>
-    </main>
+        </section>
 
-    <footer>
-        <p>&copy; 2023 Project Files Management. All rights reserved.</p>
-    </footer>
+        <footer>
+            <p>&copy; 2023 Project Directory. All files listed locally.</p>
+        </footer>
+    </div>
 
+    <script>
+        // Simple Client-Side Search Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const cards = document.querySelectorAll('.card');
+            const noResults = document.getElementById('no-results');
+            const categoryTitles = document.querySelectorAll('.category-title');
+
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                let hasVisibleCards = false;
+
+                cards.forEach(card => {
+                    // Check filename and title (via data-name attribute)
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const filename = card.querySelector('.card-filename').textContent.toLowerCase();
+                    const keywords = card.getAttribute('data-name').toLowerCase();
+                    
+                    if (title.includes(term) || filename.includes(term) || keywords.includes(term)) {
+                        card.style.display = 'flex';
+                        hasVisibleCards = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Toggle "No Results" message if absolutely nothing is found
+                if (!hasVisibleCards) {
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                }
+
+                // Hide category titles if all cards in that category are hidden
+                const sections = document.querySelectorAll('.category-section');
+                sections.forEach(section => {
+                    const visibleCardsInSection = section.querySelectorAll('.card[style="display: flex;"]');
+                    // If display is not set (default), it is also visible. We need to count non-hidden ones.
+                    const allCardsInSection = section.querySelectorAll('.card');
+                    let visibleCount = 0;
+                    
+                    allCardsInSection.forEach(c => {
+                        if (c.style.display !== 'none') visibleCount++;
+                    });
+
+                    const title = section.querySelector('.category-title');
+                    if (visibleCount === 0) {
+                        title.style.display = 'none';
+                    } else {
+                        title.style.display = 'flex';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
